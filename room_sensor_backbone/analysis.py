@@ -4,7 +4,7 @@ An Iterable can be a list or an iterator. These functions still produce finite
 results: accepting an Iterable does NOT make whole-data analysis safe on infinity.
 """
 from collections.abc import Iterable
-from statistics import fmean
+from statistics import fmean, stdev, median
 
 
 def select_series(readings: Iterable[dict], room: str, sensor_id: str,
@@ -24,6 +24,7 @@ def basic_summary(values: list[float]) -> dict:
             "minimum": min(values), "maximum": max(values)}
 
 
+
 def explore_data(readings: list[dict]) -> dict:
     """YOUR TASK E1: describe what is present, before interpreting the values.
 
@@ -35,16 +36,15 @@ def explore_data(readings: list[dict]) -> dict:
     # Count each (room, sensor_id, metric) separately. Do not calculate a mixed-unit mean.
     raise NotImplementedError("E1: implement data exploration in analysis.py")
 
-
 def extended_summary(values: list[float]) -> dict:
-    """YOUR TASK S1: extend basic_summary with median and sample_sd.
-
-    sample_sd uses n-1, and is None for fewer than two values. For no values,
-    median is also None. Reuse basic_summary instead of rewriting its fields.
-    """
-    # The statistics module supplies median and stdev; decide when they are defined.
-    raise NotImplementedError("S1: implement the extended summary in analysis.py")
-
+    """Create a summary basen pn basic_summary with an addition of median and standard deviation"""
+    if values is None:
+        return None
+    if len(values) == 0:
+        return {"count": 0, "mean": None, "minimum": None, "maximum": None, "median": None, "sample_sd": None}
+    extended = basic_summary(values)
+    extended.update({"median": median(values) if len(values)>=1 else None, "sample_sd": stdev(values) if len(values)>=2 else None})
+    return extended
 
 def summarise_by_series(readings: list[dict]) -> list[dict]:
     """YOUR TASK S2: return one independently calculated summary per series.
@@ -54,4 +54,32 @@ def summarise_by_series(readings: list[dict]) -> list[dict]:
     Sort the output by room/sensor_id/metric. Empty input returns [].
     """
     # Group by the complete three-part key, then analyse each group separately.
-    raise NotImplementedError("S2: implement grouped summaries in analysis.py")
+    if readings is None:
+        return []
+
+    temp_dict = {}
+
+    for reading in readings:
+        key = (reading["room"], reading["sensor_id"], reading["metric"])
+        temp_dict.setdefault(key, {}).setdefault(reading["unit"],[]).append(reading["value"])
+
+    summarised_readings = []
+
+    for key in sorted(temp_dict):
+        unit = list(temp_dict[key].keys())[0] # get first unit (others not supported)
+        values = temp_dict[key][unit]
+        summary = extended_summary(values)
+
+        room, sensor_id, metric = key
+        summarised_readings.append(
+            {
+                "room" : room,
+                "sensor_id" : sensor_id,
+                "metric" : metric,
+                "unit" : unit,
+                "summary" : summary
+            }
+        )
+
+    return summarised_readings
+    
