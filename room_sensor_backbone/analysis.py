@@ -33,7 +33,49 @@ def explore_data(readings: list[dict]) -> dict:
     Use actual times, not row positions; input records need not be time-sorted.
     """
     # Count each (room, sensor_id, metric) separately. Do not calculate a mixed-unit mean.
-    raise NotImplementedError("E1: implement data exploration in analysis.py")
+    rooms = set()
+    sensor_ids = set()
+    metrics = set()
+    series = {}
+
+    times = []
+
+    for reading in readings:
+        room = reading["room"]
+        sensor_id = reading["sensor_id"]
+        metric = reading["metric"]
+        unit = reading["unit"]
+        time = reading["time"]
+
+        rooms.add(room)
+        sensor_ids.add(sensor_id)
+        metrics.add(metric)
+        times.append(time)
+
+        key = (room, sensor_id, metric)
+
+        if key not in series:
+            series[key] = {
+                "room": room,
+                "sensor_id": sensor_id,
+                "metric": metric,
+                "unit": unit,
+                "count": 0
+            }
+
+        series[key]["count"] += 1
+
+    result = {
+        "record_count": len(readings),
+        "rooms": sorted(rooms),
+        "sensor_ids": sorted(sensor_ids),
+        "metrics": sorted(metrics),
+        "time_start": min(times) if times else None,
+        "time_end": max(times) if times else None,
+        "series": sorted(series.values(), key=lambda x: (x["room"], x["sensor_id"], x["metric"]))
+    }
+
+    return result
 
 
 def extended_summary(values: list[float]) -> dict:

@@ -4,6 +4,8 @@ The CSV reader is your worked example. You implement JSON and JSON Lines.
 Readers must not calibrate measurements or calculate statistics.
 """
 import csv
+import json
+
 from pathlib import Path
 
 from records import FIELDS, parse_record
@@ -36,7 +38,22 @@ def read_json(path: Path) -> list[dict]:
     """
     # Start with `with Path(path).open(encoding="utf-8") as stream:`.
     # Use json.load(stream), check the container, then transform each object.
-    raise NotImplementedError("R1: implement the JSON reader in readers.py")
+    with Path(path).open(encoding="utf-8") as stream:
+        data = json.load(stream)
+    
+    if not isinstance(data, list):
+        raise ValueError(f"{path}: JSON file must contain an array")
+
+    records = []
+
+    for row in data:
+        try:
+            records.append(parse_record(row))
+        except ValueError as error:
+            raise ValueError(f"{path}: {error}") from error
+
+    return records
+
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -46,7 +63,20 @@ def read_jsonl(path: Path) -> list[dict]:
     error. This first version returns a finite list; streaming is a later task.
     """
     # Open the file with `with`, enumerate lines from 1, and skip empty lines.
-    raise NotImplementedError("R2: implement the JSON Lines reader in readers.py")
+    records = []
+
+    with Path(path).open(encoding="utf-8") as stream:
+        for line_number, line in enumerate(stream, start=1):
+            if not line.strip():
+                continue
+
+            try:
+                row = json.loads(line)
+                records.append(parse_record(row))
+            except ValueError as error:
+                raise ValueError(f"{path}: JSONL line {line_number}: {error}") from error
+
+    return records
 
 
 def read_data(path: Path, file_format: str) -> list[dict]:
