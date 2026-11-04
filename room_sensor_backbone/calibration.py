@@ -22,4 +22,7 @@ def calibrate_reading(reading: dict, scale: float, offset: float) -> dict:
     The original dictionary must remain untouched; never calibrate it in place.
     """
     # Copy the record, calculate the new value, and return your copy.
+    new_record = reading.copy()
+    new_record["value"] = calibrate_value(reading["value"], scale=scale, offset=offset)
+    return new_record
     raise NotImplementedError("C1: implement record calibration in calibration.py")
