@@ -20,7 +20,11 @@ def configure_logging(level: str = "INFO", log_path: Optional[Path] = None) -> N
     if log_path is not None:
         # YOUR TASK L1: create the parent directory, then append a UTF-8 FileHandler.
         # Keep the StreamHandler too. Use append mode so earlier runs are retained.
-        raise NotImplementedError("L1: add file logging in logging_service.py")
+        log_path = Path(log_path)
+        log_path.parent.mkdir(parents=True, exist_ok = True)
+        file_handler = logging.FileHandler(log_path, mode="a", encoding="utf-8")
+        handlers.append(file_handler)
+        
 
     # force=True prevents duplicate handlers when you rerun this small application.
     # This belongs to the entry point, not to a library imported by another program.
