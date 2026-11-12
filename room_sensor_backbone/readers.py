@@ -1,7 +1,7 @@
-"""Input boundary: read a finite file and return a list of standard records.
+"""Read finite sensor files without doing calibration or statistical analysis.
 
-The CSV reader is your worked example. You implement JSON and JSON Lines.
-Readers must not calibrate measurements or calculate statistics.
+CSV is the original worked example. R1 and R2 now supply equivalent JSON and
+JSON Lines readers. Every format uses parse_record as the same input boundary.
 """
 import csv
 import json
@@ -12,9 +12,9 @@ from records import FIELDS, parse_record
 
 
 def read_csv(path: Path) -> list[dict]:
-    """WORKED EXAMPLE: read a header-based CSV file, stopping at the first bad row."""
+    """Read a header-based CSV file, stopping at the first invalid row."""
     records = []
-    # newline="" lets the CSV parser handle line endings; UTF-8-sig accepts a BOM.
+    # newline="" lets csv handle line endings; utf-8-sig also accepts a CSV BOM.
     with Path(path).open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
         if reader.fieldnames is None or not set(FIELDS) <= set(reader.fieldnames):
@@ -25,15 +25,23 @@ def read_csv(path: Path) -> list[dict]:
                     raise ValueError("Too many columns in this CSV row.")
                 records.append(parse_record(row))
             except ValueError as error:
-                # Keep the filename and row location so that you can repair the input.
+                # Keep the location so that you can find and repair the input.
                 raise ValueError(f"{path}: CSV line {reader.line_num}: {error}") from error
     return records
 
 
 def read_json(path: Path) -> list[dict]:
-    """YOUR TASK R1: load a JSON array; validate each object with parse_record.
+    """SOLUTION R1: read a JSON array and return standard records in file order."""
+    # Decode the complete finite document once. Missing files still raise OSError.
+    with Path(path).open(encoding="utf-8") as stream:
+        try:
+            rows = json.load(stream)
+        except json.JSONDecodeError as error:
+            raise ValueError(
+                f"{path}: JSON line {error.lineno}, column {error.colno}: {error.msg}"
+            ) from error
 
-    Require a list at the top level. Preserve order. An empty array returns [].
+    """Require a list at the top level. Preserve order. An empty array returns [].
     Raise ValueError for invalid content; let file-access errors propagate.
     """
     # Start with `with Path(path).open(encoding="utf-8") as stream:`.
@@ -80,8 +88,8 @@ def read_jsonl(path: Path) -> list[dict]:
 
 
 def read_data(path: Path, file_format: str) -> list[dict]:
-    """Choose a reader explicitly; do not guess the format from the filename."""
-    # A short conditional is enough here. You do not need a plugin framework.
+    """Choose a reader explicitly; do not guess the format from a file suffix."""
+    # A visible conditional is enough; there is no registry or plugin framework.
     if file_format == "csv":
         return read_csv(path)
     if file_format == "json":

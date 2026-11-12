@@ -1,0 +1,74 @@
+{
+  "started_at": "2026-11-10T09:49:04.860922+00:00",
+  "config": {
+    "mode": "simulation",
+    "simulation": {
+      "max_readings": null,
+      "sensors": [
+        {
+          "room": "laboratory",
+          "sensor_id": "station-01",
+          "metric": "temperature",
+          "interval_seconds": 5.0,
+          "mean": 21.0,
+          "noise_std": 0.25,
+          "seed": 42
+        },
+        {
+          "room": "laboratory",
+          "sensor_id": "station-01",
+          "metric": "humidity",
+          "interval_seconds": 7.0,
+          "mean": 45.0,
+          "noise_std": 1.0,
+          "seed": 43
+        },
+        {
+          "room": "laboratory",
+          "sensor_id": "station-01",
+          "metric": "pressure",
+          "interval_seconds": 10.0,
+          "mean": 1013.0,
+          "noise_std": 0.4,
+          "seed": 44
+        },
+        {
+          "room": "office",
+          "sensor_id": "station-02",
+          "metric": "temperature",
+          "interval_seconds": 12.0,
+          "mean": 23.0,
+          "noise_std": 0.3,
+          "seed": 45
+        }
+      ]
+    },
+    "recording": {
+      "directory": "/root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions",
+      "fsync": false
+    },
+    "stream": {
+      "window_size": 30
+    },
+    "selection": {
+      "room": "laboratory",
+      "sensor_id": "station-01",
+      "metric": "temperature"
+    },
+    "calibration": {
+      "enabled": true,
+      "scale": 1.02,
+      "offset": -0.4
+    },
+    "logging": {
+      "level": "INFO",
+      "path": "/root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/simulation.log"
+    }
+  },
+  "status": "failed",
+  "records_saved": 0,
+  "selected_records": 0,
+  "error": "NotImplementedError: G5: implement rolling_windows in streaming.py.",
+  "finished_at": "2026-11-10T09:49:04.861888+00:00",
+  "elapsed_seconds": 0.0009801100000004226
+}

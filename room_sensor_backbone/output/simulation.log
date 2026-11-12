@@ -1,0 +1,18 @@
+INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_quick.json
+INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T094758_489302Z_65dec0cc
+ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
+INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_10_readings.json
+INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T094848_698139Z_a1d997c2
+ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
+INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_continuous.json
+INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T094904_858923Z_8bb48e3a
+ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
+INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_quick.json
+INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T104909_083104Z_3ebe91b2
+ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
+INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_10_readings.json
+INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T104909_177892Z_1c8f7375
+ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
+INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_continuous.json
+INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T104909_264662Z_81bd3bde
+ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.

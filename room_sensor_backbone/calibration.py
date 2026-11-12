@@ -1,14 +1,13 @@
-"""Pure calibration functions: input values in, corrected values out.
+"""Pure calibration: coefficients and measurements in, new values out.
 
-Calibration never opens a file, reads configuration, prints, or writes a log.
-You pass coefficients as arguments. See task C1 in STUDENT_GUIDE.md.
+No function here opens a file, reads configuration, prints, or configures logging.
+The coefficients correct values within one unit; this is not unit conversion.
 """
 from math import isfinite
 
 
 def calibrate_value(value: float, scale: float = 1.0, offset: float = 0.0) -> float:
-    """WORKED EXAMPLE: apply y = scale * x + offset in the same physical unit."""
-    # These are supplied coefficients, not a fit to a reference measurement.
+    """Apply y = scale * x + offset using supplied, not fitted, coefficients."""
     result = scale * value + offset
     if not isfinite(result):
         raise ValueError("Calibration produced a non-finite value.")

@@ -1,24 +1,25 @@
-"""Pure selection and finite-data analysis. There is no file or logging code here.
+"""Pure selection, exploration and statistics for finite, parsed records.
 
-An Iterable can be a list or an iterator. These functions still produce finite
-results: accepting an Iterable does NOT make whole-data analysis safe on infinity.
+No files are opened here and nothing is logged. Keep each room/sensor/metric
+separate: taking a mean across temperatures, humidities and pressures is invalid.
 """
 from collections.abc import Iterable
-from statistics import fmean, stdev, median
+from datetime import datetime
+from statistics import fmean, median, stdev
 
 
 def select_series(readings: Iterable[dict], room: str, sensor_id: str,
                   metric: str) -> list[dict]:
-    """WORKED EXAMPLE: select exactly one room/sensor/metric combination."""
-    # We create a new list, but do not copy or modify the contained dictionaries.
+    """Select exactly one series, consuming the input iterable once."""
+    # The list is new; its dictionaries are shared and must be treated as read-only.
     return [r for r in readings
             if (r["room"], r["sensor_id"], r["metric"]) == (room, sensor_id, metric)]
 
 
 def basic_summary(values: list[float]) -> dict:
-    """WORKED EXAMPLE: count, mean, minimum and maximum for one finite series."""
-    # An empty selection is not a collection of zero-valued measurements.
+    """Count, mean, minimum and maximum for one finite numerical series."""
     if not values:
+        # None means unavailable, not a measurement whose numerical value is zero.
         return {"count": 0, "mean": None, "minimum": None, "maximum": None}
     return {"count": len(values), "mean": fmean(values),
             "minimum": min(values), "maximum": max(values)}
@@ -38,6 +39,43 @@ def explore_data(readings: list[dict]) -> dict:
     sensor_ids = set()
     metrics = set()
     series = {}
+def _group_by_series(readings: list[dict]) -> dict:
+    """Share the small grouping step used by exploration and per-series summaries."""
+    groups = {}
+    for reading in readings:
+        key = (reading["room"], reading["sensor_id"], reading["metric"])
+        if key not in groups:
+            groups[key] = []
+        # Parsed input already obeys this; the guard also protects direct callers.
+        if groups[key] and groups[key][0]["unit"] != reading["unit"]:
+            raise ValueError(f"Inconsistent units within series {key!r}.")
+        groups[key].append(reading)
+    return groups
+
+
+def explore_data(readings: list[dict]) -> dict:
+    """SOLUTION E1: describe identity, coverage and counts without mixing quantities."""
+    groups = _group_by_series(readings)
+    series = []
+    for room, sensor_id, metric in sorted(groups):
+        group = groups[(room, sensor_id, metric)]
+        series.append({"room": room, "sensor_id": sensor_id, "metric": metric,
+                       "unit": group[0]["unit"], "count": len(group)})
+
+    # Compare actual instants, not the input order or the alphabetical order of text.
+    time_start = None
+    time_end = None
+    if readings:
+        earliest = min(readings, key=lambda r: datetime.fromisoformat(r["time"]))
+        latest = max(readings, key=lambda r: datetime.fromisoformat(r["time"]))
+        time_start = earliest["time"]
+        time_end = latest["time"]
+
+    return {"record_count": len(readings),
+            "rooms": sorted({r["room"] for r in readings}),
+            "sensor_ids": sorted({r["sensor_id"] for r in readings}),
+            "metrics": sorted({r["metric"] for r in readings}),
+            "time_start": time_start, "time_end": time_end, "series": series}
 
     times = []
 

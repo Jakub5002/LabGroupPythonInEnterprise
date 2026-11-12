@@ -1,22 +1,26 @@
-"""EXTENSION 1: one pure function to connect your finite-data calculations.
+"""The functional core: select, optionally calibrate, and summarise finite records.
 
-Do this after the individual tasks. This file is not a second application runner.
-Reading files, configuring logs, printing and saving still belong in run.py.
+No configuration file is opened here. No globals are read and no input is mutated.
+File access, logging and saving belong to the application entry point.
 """
 from collections.abc import Iterable
+
+from analysis import extended_summary, select_series
+from calibration import calibrate_reading
 
 
 def process_readings(readings: Iterable[dict], selection: dict,
                      calibration: dict) -> dict:
-    """YOUR TASK X3: select -> optionally calibrate -> calculate extended_summary.
+    """SOLUTION X3: consume one source once and return a new finite result."""
+    # Filter first: these coefficients belong to this one physical series only.
+    selected = select_series(readings, **selection)
+    if calibration["enabled"]:
+        processed = [calibrate_reading(record, calibration["scale"], calibration["offset"])
+                     for record in selected]
+    else:
+        # Still return new dictionaries, so a caller cannot edit raw data via output.
+        processed = [record.copy() for record in selected]
 
-    Return {"readings": processed_records, "summary": statistics,
-            "calibration_applied": calibration["enabled"]}.
-    Use the selection keys room/sensor_id/metric and calibration keys
-    enabled/scale/offset. Apply the coefficients ONLY to the selected series.
-    Leave all input records and settings unchanged. Consume the source once.
-    The output is a finite snapshot: it is not an infinite-stream processor.
-    """
-    # Reuse select_series, calibrate_reading and extended_summary.
-    # A clear list comprehension is functional Python too; no large lambda is needed.
-    raise NotImplementedError("X3: connect the pure processing steps in processing.py")
+    values = [record["value"] for record in processed]
+    return {"readings": processed, "summary": extended_summary(values),
+            "calibration_applied": calibration["enabled"]}

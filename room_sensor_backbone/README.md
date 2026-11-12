@@ -1,118 +1,134 @@
-# Your room-sensor project: start small
+# Room sensors — from finite files to paced generators
 
-You are building a program that reads sensor measurements, helps you understand
-what you have received, applies a calibration, calculates statistics, and saves
-useful results. Later, you will use the same processing ideas on a stream of
-measurements. **Today, you work with small, finite files.**
+**For this meeting:** use [Start Here](docs/01_START_HERE.md) and [Solutions](GENERATOR_SOLUTIONS.md) together. The longer guides are optional.
 
-This folder is your starting point, not a finished application. You have one small
-working example, clear interfaces, sample files, and tasks to complete. Functions
-marked `YOUR TASK` deliberately raise `NotImplementedError` until you implement
-them. The normal first run does not call those unfinished functions.
+**Edition: BACKBONE.** The earlier finite tasks are already solved.
+Six new G1–G6 function bodies are left for you to implement. File mode works now;
+simulation becomes runnable after G1, G2, G4, G5 and G6 are complete.
+This folder extends the latest `room_sensor_solved` solution; it does not replace
+it with a web application. You still run ordinary Python files from a folder.
 
-## 1. Run something before changing anything
+You will now process measurements that arrive over time rather than as a complete
+list. You can choose a file or simulated sensors in JSON. The simulator records
+every acquired measurement for offline analysis, while a small rolling window
+prepares the selected series for a later visualisation step.
 
-**Annotation-fix edition:** this copy uses compatible `Optional` / `Union` type
-hints in the logging and storage modules. See `COMPATIBILITY.md` if your interpreter
-is older than the original classroom target. No exercise solutions were added.
 
-Use Python 3.11 or newer. There are no third-party dependencies and no installation
-step. Extract the folder, open a terminal inside it, and run:
+## Start with what you already know
+
+Extract this folder beside your previous work. In a terminal inside this folder:
 
 ```bash
+python --version
 python run.py
 ```
 
-On a system where the command is named `python3`, use `python3 run.py`. On Windows,
-`py -3 run.py` also works when the selected Python is 3.11 or newer. An editor's
-Run button is fine too: choose `run.py`, not an individual helper module.
-
-The program reads three temperatures: 20, 21, and 22 C. You should see:
-
-```text
-Uncalibrated summary: {'count': 3, 'mean': 21.0, 'minimum': 20.0, 'maximum': 22.0}
-```
-
-You will also see log messages and a new `output/baseline.json` file. **No
-calibration is applied in this baseline.** Its warning and output metadata say so.
-Repeated runs replace this small output snapshot; they do not change `data/`.
-The log and print lines may interleave because they use different output streams.
-
-## 2. Know what is already working
-
-| Supplied working example | Work you will add |
-|---|---|
-| Read CSV and check the common record format | Read JSON and JSON Lines |
-| Select a single room/sensor/metric | Explore and summarise all series separately |
-| Apply a scalar calibration formula | Calibrate whole records without mutation |
-| Calculate count, mean, minimum, maximum | Add median and sample standard deviation |
-| Save a JSON snapshot | Save CSV and JSON Lines snapshots |
-| Display console logs | Also keep an append-only file log |
-| Use explicit choices in `run.py` | Load and validate a configuration file |
-
-A sample configuration file is included for **Extension 1**. It is not read by the
-baseline, and the configuration tasks are not yet implemented. Passing a config
-argument to the starter is rejected rather than silently ignored. There is no hidden
-completed solution and no automatic discovery mechanism.
-
-## 3. Open only the files you need
-
-```text
-room_sensor_backbone/
-    run.py                    Start here: the visible processing order
-    records.py                Supplied common record parser
-    readers.py                CSV example; JSON / JSON Lines tasks
-    calibration.py            Scalar example; record-calibration task
-    analysis.py               Selection / basic summary; exploration / stats tasks
-    storage.py                JSON example; CSV / JSON Lines tasks
-    logging_service.py        Console example; file-log task
-    configuration.py          Extension 1: file configuration tasks
-    processing.py             Extension 1: pure finite-pipeline task
-    data/                     Tiny, larger, equivalent-format and broken inputs
-    config/example.json       Extension 1 specimen, not a package manifest
-    checks/                   Optional checks to use after trying the examples
-    README.md                 This starting page
-    DATA_CONTRACT.md           The record your modules agree to exchange
-    STUDENT_GUIDE.md           Your first tasks, hints and acceptance examples
-    EXTENSION_1.md             Configuration and functional processing
-    NEXT_STEP.md              Preparation for generators; do not start here
-    PROGRESS.md                Your short working notes
-    VALIDATION.md              What was checked in the distributed starter
-```
-
-`output/` is created when you run the program. It is not supplied as input data.
-You do not need to read the optional checks before understanding the first run.
-
-## 4. Follow the progression
-
-Read `DATA_CONTRACT.md`, then work through `STUDENT_GUIDE.md`. Complete and connect
-one function at a time. After your finite pipeline works, move to `EXTENSION_1.md`.
-Only then read `NEXT_STEP.md` to prepare for generator-based sources.
-
-Here, a **service** means a function or small module with a clear job: read data,
-load settings, or save results. It does not mean a web server or a background
-process. There are no classes to subclass, decorators to register, web routes,
-threads, asynchronous tasks, databases, or browser code to learn in this stage.
-
-This is an ordinary folder of Python modules, not an installable distribution.
-Do not create packaging metadata or initialise a Git repository yet. Your files
-are already separated by responsibility, so both can be introduced later without
-rewriting the scientific calculations.
-
-## 5. Check your work when you are ready
-
-The supplied working examples have a small optional check suite:
+The default still uses the previous `config/example.json` and processes a finite
+file. `python run_finite.py` also still works. You can now make the mode explicit:
 
 ```bash
-python -m unittest discover -s checks -p "test_*.py" -v
+python run.py config/files.json
 ```
 
-The task examples are separate:
+## Try the new stage
 
 ```bash
-python -m unittest discover -s checks -p "exercise_*.py" -v
+# Ten readings, 0.2 seconds apart: a small, genuinely paced demonstration.
+python run.py config/simulation_quick.json
+
+# Ten readings, 5 seconds apart: the first at about 5 s, the tenth at about 50 s.
+python run.py config/simulation_10_readings.json
+
+# Several measurement channels; keep collecting until you press Ctrl+C.
+python run.py config/simulation_continuous.json
 ```
 
-At the beginning, task checks report `skipped` and the corresponding task ID. This
-means **not implemented**, not passed. As you complete a task, its checks become
-active. Passing these examples is a starting point; also try your own edge cases.
+The scheduler does not emit at time zero. A five-second interval therefore means
+roughly fifty seconds to collect ten measurements from one sensor. This is
+ordinary OS-paced execution, not a hard-real-time guarantee; processing and
+scheduling may make a run longer. The quick config actually changes the interval;
+it does not invent timestamps or bypass sleeping.
+
+## What you configure
+
+`mode` is `files` or `simulation`. Each simulated channel has `room`, `sensor_id`,
+`metric`, `interval_seconds`, `mean`, `noise_std`, and `seed`. Supported metric/unit
+pairs are `temperature`/`C`, `pressure`/`hPa`, and `humidity`/`%`, exactly as in the
+previous record contract. A station can have several channels with different
+intervals. `max_readings: null` runs without a count limit; a positive integer
+limits the TOTAL raw records across all channels, before selection.
+
+`selection` still identifies one series. Its `calibration` applies only to that
+series. All raw readings, including unselected humidity/pressure/other rooms, are
+archived before any calibration. `stream.window_size` bounds the number of
+selected observations retained for the live summary.
+
+## What a run creates
+
+Each simulation prints a unique directory under `output/sessions/`:
+
+```text
+<unique-session>/
+    raw.jsonl             All recorded RAW measurements, one object per line
+    session.json          Configuration, timing, counts, and final run status
+    latest.json           Selected, calibrated rolling window and its statistics
+    offline_config.json   Ready-to-run config for analysing this archive later
+```
+
+After stopping, copy the offline-analysis command printed by your run:
+
+```text
+python run.py "<actual-session-directory>/offline_config.json"
+```
+
+This creates `offline/calibrated.csv` and `offline/summary.json` inside that session.
+It does not replace the raw recording. The offline summary uses the entire finite
+recording; the live summary uses only the most recent window. They need not match.
+
+## Two handouts for this session
+
+Use these side by side; you do not need to read every guide first.
+
+- [Start here](docs/01_START_HERE.md): your six tasks, settings, commands, and expected results.
+- [Solutions — G1–G6](GENERATOR_SOLUTIONS.md): short explanations and checks for each task.
+
+The remaining guides in `docs/` are **optional reference** for extra detail on
+pacing, configuration, recording, visualisation, and edge cases. Earlier
+assignment guides and `SOLUTIONS.md` concern the preceding finite-data stage.
+`PREVIOUS_GENERATOR_PLAN.md` is historical, not this iteration's task list.
+
+## Your main working files
+
+Only three modules contain new student tasks: `simulation.py` (G1, G2),
+`streaming.py` (G3, G4, G5), and `recording.py` (G6). The scheduler and orchestration
+are worked infrastructure so that you can concentrate on small functions first.
+
+`run.py` chooses the mode. `file_workflow.py` contains the earlier finite workflow.
+`run_configuration.py` validates the new settings while reusing the original
+configuration service. `run_stream.py` connects acquisition, recording, processing,
+and finite snapshots. It is intentionally an ordinary visible loop, not a service
+framework.
+
+## Check your work
+
+```bash
+# Earlier checks plus the new generator checks:
+python -m unittest discover -s checks -p "*.py" -v
+
+# Only this iteration:
+python -m unittest discover -s checks -p "test_generator_extension.py" -v
+```
+
+In the student edition, unimplemented G tasks are reported as **skipped**, not
+passed. Other failures remain failures. The reference edition must have no skipped
+tasks. Most timing checks use an explicitly injected fake clock; application runs
+always use real clocks and real waits.
+
+## Boundaries to keep visible
+
+A generator advances only when consumed; it is not an independently running
+hardware sensor. Slow downstream work can delay acquisition. This stage skips
+missed time slots instead of generating fake catch-up measurements. Memory is
+bounded during streaming, but the raw file and operational log can grow without
+limit. Ordinary flushing is not a guarantee against power failure. Details and
+verified limitations are in the guides and `VALIDATION.md`.
