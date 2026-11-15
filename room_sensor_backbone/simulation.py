@@ -42,7 +42,10 @@ Neither case should cause us to deliberately emit before the deadline.
     # Subtract clock() from deadline to find the remaining delay.
     # While it is positive, call sleep(remaining), then check the clock again.
     # Never busy-wait or request a negative sleep.
-    raise NotImplementedError("G2: implement wait_until in simulation.py.")
+    remaining = deadline - clock()
+    while remaining > 0:
+        sleep(remaining)
+        remaining = deadline - clock()
 
 
 def utc_now() -> datetime:
