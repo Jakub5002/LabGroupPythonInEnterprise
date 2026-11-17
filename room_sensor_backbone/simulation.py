@@ -9,26 +9,42 @@ from math import isfinite
 import random
 import time
 from typing import Callable, Iterator
-
 from records import UNITS, parse_record
 
 
 def sensor_values(sensor: dict) -> Iterator[float]:
-    """TASK G1: yield seeded noisy values forever, retaining no history.
-
+    """TASK G1: yield seeded noisy values forever, retaining no history. 
+    
 Use a private Random instance, not random.seed(). Temperature is in C, humidity
 in percent, pressure in hPa. The clipping is a teaching model, not sensor physics.
 """
+    _LIMITS = {
+    "temperature": (None, None),    # not clipped
+    "humidity":    (0.0, 100.0),    # percent
+    "pressure":    (0.0, None),     # hPa, lower bound only
+    }
+
+    rng = random.Random(sensor["seed"])   # private; global state untouched
+    mean = sensor["mean"]
+    noise = sensor["noise_std"]
+    low, high = _LIMITS[sensor["metric"]]
+
     while True:
-        seed =  sensor["seed"]
-        yield 0.0
+        value = rng.gauss(mean, noise)  
+        if not isfinite(value):           
+            raise ValueError(
+                f"Non-finite sample for sensor {sensor.get('sensor_id')!r}."
+            )
+        if low is not None:
+            value = max(low, value)
+        if high is not None:
+            value = min(high, value)
+        yield value
     # TODO G1: your implementation begins here.
     # Create your own random.Random using sensor["seed"].
     # In an infinite loop, sample, check finiteness, apply the metric limits,
     # and yield one float. Do not sleep or accumulate a list here.
 
-    raise NotImplementedError("G1: implement sensor_values in simulation.py.")
-    yield 0.0  # Unreachable marker: preserve generator behaviour until implemented.
 
 
 def wait_until(deadline: float, clock: Callable = time.monotonic,
@@ -38,11 +54,14 @@ def wait_until(deadline: float, clock: Callable = time.monotonic,
 Recheck after sleeping. An OS can wake us late; a test sleeper can wake us early.
 Neither case should cause us to deliberately emit before the deadline.
 """
+    remaining = deadline - clock()
+    while remaining > 0:
+        sleep(remaining)
+        remaining = deadline - clock()
     # TODO G2: your implementation begins here.
     # Subtract clock() from deadline to find the remaining delay.
     # While it is positive, call sleep(remaining), then check the clock again.
     # Never busy-wait or request a negative sleep.
-    raise NotImplementedError("G2: implement wait_until in simulation.py.")
 
 
 def utc_now() -> datetime:
