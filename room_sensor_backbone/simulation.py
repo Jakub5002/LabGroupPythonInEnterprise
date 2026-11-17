@@ -63,7 +63,6 @@ Neither case should cause us to deliberately emit before the deadline.
     # While it is positive, call sleep(remaining), then check the clock again.
     # Never busy-wait or request a negative sleep.
 
-
 def utc_now() -> datetime:
     """Use wall-clock UTC for stored timestamps, not for scheduling delays."""
     return datetime.now(timezone.utc)
