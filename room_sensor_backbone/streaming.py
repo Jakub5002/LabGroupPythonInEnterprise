@@ -38,9 +38,16 @@ series' calibration coefficients to another metric or station.
     # Filter lazily using the complete room/sensor_id/metric identity.
     # For matching records, yield a calibrated new record or an unchanged copy.
     # Reuse calibrate_reading; never materialise the incoming iterable.
-    raise NotImplementedError("G4: implement select_calibrated in streaming.py.")
-    yield {}  # Unreachable marker: preserve generator behaviour until implemented.
-
+    scale = calibration.get("scale", 1.0) if calibration else 1.0
+    offset = calibration.get("offset", 0.0) if calibration else 0.0
+    is_enabled = calibration.get("enabled", True) if calibration else False
+    
+    for record in readings:
+        if(record.get("room") == selection.get("room") and record.get("sensor_id") == selection.get("sensor_id") and record.get("metric") == selection.get("metric")):
+            if is_enabled:
+                yield calibrate_reading(record, scale=scale, offset=offset)
+        else:
+            yield record.copy()
 
 def rolling_windows(readings: Iterable[dict], size: int) -> Iterator[list[dict]]:
     """TASK G5: yield a separate snapshot after each selected observation.
