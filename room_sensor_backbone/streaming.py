@@ -19,12 +19,17 @@ def iter_jsonl(path: Path) -> Iterator[dict]:
 Ignore blank lines; report the line number on invalid input. Exhaust or close
 this generator to close its file. This is a replay reader, not a file-tail service.
 """
-    # TODO G3: your implementation begins here.
-    # Open the file with a with block inside this generator.
-    # Skip blank lines; decode and parse one record at a time.
-    # Report bad rows with filename/line number, then yield valid records.
-    raise NotImplementedError("G3: implement iter_jsonl in streaming.py.")
-    yield {}  # Unreachable marker: preserve generator behaviour until implemented.
+    with path.open('r') as file:
+        for line_num, line in enumerate(file, start=1):
+            line = line.strip()
+            if len(line) == 0:
+                continue
+            try:
+                record = json.loads(line)
+            except ValueError as err:
+                raise ValueError(f"{path.name}: line {line_num}: {err}") from err
+            yield record
+            
 
 
 def select_calibrated(readings: Iterable[dict], selection: dict,
@@ -38,9 +43,16 @@ series' calibration coefficients to another metric or station.
     # Filter lazily using the complete room/sensor_id/metric identity.
     # For matching records, yield a calibrated new record or an unchanged copy.
     # Reuse calibrate_reading; never materialise the incoming iterable.
-    raise NotImplementedError("G4: implement select_calibrated in streaming.py.")
-    yield {}  # Unreachable marker: preserve generator behaviour until implemented.
-
+    scale = calibration.get("scale", 1.0) if calibration else 1.0
+    offset = calibration.get("offset", 0.0) if calibration else 0.0
+    is_enabled = calibration.get("enabled", True) if calibration else False
+    
+    for record in readings:
+        if(record.get("room") == selection.get("room") and record.get("sensor_id") == selection.get("sensor_id") and record.get("metric") == selection.get("metric")):
+            if is_enabled:
+                yield calibrate_reading(record, scale=scale, offset=offset)
+        else:
+            yield record.copy()
 
 def rolling_windows(readings: Iterable[dict], size: int) -> Iterator[list[dict]]:
     """TASK G5: yield a separate snapshot after each selected observation.
@@ -48,12 +60,26 @@ def rolling_windows(readings: Iterable[dict], size: int) -> Iterator[list[dict]]
 Yield partial windows during warm-up. One sample permits a mean but not sample
 standard deviation. Do not mix series; do not leak mutable window state.
 """
-    # TODO G5: your implementation begins here.
-    # Validate size, create a deque(maxlen=size), and keep one series/unit only.
-    # Store copies, then yield a new list of record copies after every input.
-    # Keep warm-up windows and do not retain the whole history.
-    raise NotImplementedError("G5: implement rolling_windows in streaming.py.")
-    yield []  # Unreachable marker: preserve generator behaviour until implemented.
+    if isinstance(size, bool) or not isinstance(size, int) or size < 1:
+        raise ValueError("window size must be a positive integer.")
+
+    window: deque[dict] = deque(maxlen=size)
+    series_identity: tuple[str, str, str, str] | None = None
+
+    for row in readings:
+        current_identity = (
+            row["room"],
+            row["sensor_id"],
+            row["metric"],
+            row["unit"],
+        )
+        if series_identity is None:
+            series_identity = current_identity
+        elif current_identity != series_identity:
+            raise ValueError("rolling_windows accepts records from one series only.")
+
+        window.append(row.copy())
+        yield [item.copy() for item in window]
 
 
 def build_snapshot(window: list[dict], selection: dict, calibration: dict,
