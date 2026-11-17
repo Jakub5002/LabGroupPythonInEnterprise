@@ -43,14 +43,19 @@ series' calibration coefficients to another metric or station.
     # Filter lazily using the complete room/sensor_id/metric identity.
     # For matching records, yield a calibrated new record or an unchanged copy.
     # Reuse calibrate_reading; never materialise the incoming iterable.
-    scale = calibration.get("scale", 1.0) if calibration else 1.0
-    offset = calibration.get("offset", 0.0) if calibration else 0.0
-    is_enabled = calibration.get("enabled", True) if calibration else False
-    
+    keys = ("room", "sensor_id", "metric")
+    wanted = tuple(selection[k] for k in keys)
+
+    calibration = calibration or {}
+    scale = calibration.get("scale", 1.0)
+    offset = calibration.get("offset", 0.0)
+    is_enabled = calibration.get("enabled", True)
+
     for record in readings:
-        if(record.get("room") == selection.get("room") and record.get("sensor_id") == selection.get("sensor_id") and record.get("metric") == selection.get("metric")):
-            if is_enabled:
-                yield calibrate_reading(record, scale=scale, offset=offset)
+        if tuple(record.get(k) for k in keys) != wanted:
+            continue  # inne serie są odrzucane
+        if is_enabled:
+            yield calibrate_reading(record, scale=scale, offset=offset)
         else:
             yield record.copy()
 

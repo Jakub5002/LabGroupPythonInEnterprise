@@ -5,3 +5,10 @@ INFO | __main__ | Calibration enabled: scale=1.02, offset=-0.4
 INFO | __main__ | Saved /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/finite/calibrated.csv
 INFO | __main__ | Saved /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/finite/calibrated.jsonl
 INFO | __main__ | Saved /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/finite/summary.json
+INFO | __main__ | Reading csv input: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/data/readings.csv
+INFO | __main__ | Read 36 raw records in 6 series
+INFO | __main__ | Selected 6 records for {'room': 'laboratory', 'sensor_id': 'station-01', 'metric': 'temperature'}
+INFO | __main__ | Calibration enabled: scale=1.02, offset=-0.4
+INFO | __main__ | Saved /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/finite/calibrated.csv
+INFO | __main__ | Saved /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/finite/calibrated.jsonl
+INFO | __main__ | Saved /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/finite/summary.json

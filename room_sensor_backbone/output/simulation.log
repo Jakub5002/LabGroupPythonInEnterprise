@@ -16,3 +16,14 @@ ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
 INFO | __main__ | Loaded configuration: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/config/simulation_continuous.json
 INFO | run_stream | Recording session: /root/Lab_python/Gen/sensor_project/room_sensor_generators/room_sensor_generators/output/sessions/20261110T104909_264662Z_81bd3bde
 ERROR | __main__ | Run stopped: G5: implement rolling_windows in streaming.py.
+INFO | __main__ | Loaded configuration: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/config/simulation_continuous.json
+INFO | run_stream | Recording session: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/sessions/20261117T215631_019226Z_9a698d90
+ERROR | __main__ | Run stopped: rolling_windows accepts records from one series only.
+INFO | __main__ | Loaded configuration: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/config/simulation_continuous.json
+INFO | run_stream | Recording session: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/sessions/20261117T215802_487995Z_2723682e
+INFO | run_stream | Ctrl+C received; closing the current recording.
+INFO | run_stream | Session interrupted: 15 raw readings saved
+INFO | __main__ | Loaded configuration: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/config/simulation_continuous.json
+INFO | run_stream | Recording session: /root/Lab_python/SmartDom/smart_home/room_sensor_backbone/output/sessions/20261117T220011_757058Z_bab3f69a
+INFO | run_stream | Ctrl+C received; closing the current recording.
+INFO | run_stream | Session interrupted: 52 raw readings saved
