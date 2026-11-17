@@ -12,7 +12,7 @@ Python version used:
 | G2: pacing | YES | `wait_until` computes `deadline - clock()`, sleeps while the remainder is positive, and rechecks the clock. It never busy-waits or requests a negative sleep. Tests: `test_first_measurement_is_at_5_not_0`, `test_independent_intervals_and_stable_ties`, `test_no_unused_eleventh_measurement` and `test_slow_consumer_does_not_create_synthetic_backlog` were skipped before the fix. Rerun and record that they pass. |
 | G3: lazy recording reader | |  |
 | G4: lazy selection/calibration | | |
-| G5: bounded windows | |  |
+| G5: bounded windows | YES | `rolling_windows` validates a positive integer `size` (rejecting booleans), uses `collections.deque(maxlen=size)` to bound memory, enforces a single `(room, sensor_id, metric, unit)` series, and yields fresh copies of both the window list and each record on every step. |
 | G6: continuous recording | YES | Relevant tests: `test_archive_includes_unselected_series_and_limit_is_total`, `test_ctrl_c_flushes_recording_and_final_metadata`, `test_limit_can_end_before_first_selected_record`, `test_storage_failure_is_not_a_success`. Record that they pass once G2 is fixed. |
 
 ## Explain in your own words
