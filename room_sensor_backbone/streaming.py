@@ -51,8 +51,8 @@ series' calibration coefficients to another metric or station.
         if(record.get("room") == selection.get("room") and record.get("sensor_id") == selection.get("sensor_id") and record.get("metric") == selection.get("metric")):
             if is_enabled:
                 yield calibrate_reading(record, scale=scale, offset=offset)
-        else:
-            yield record.copy()
+            else:
+                yield record.copy()
 
 def rolling_windows(readings: Iterable[dict], size: int) -> Iterator[list[dict]]:
     """TASK G5: yield a separate snapshot after each selected observation.
