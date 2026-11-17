@@ -1,0 +1,15 @@
+{"time": "2026-11-17T21:58:07.490057+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.963977417605516}
+{"time": "2026-11-17T21:58:09.492004+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "humidity", "unit": "%", "value": 46.49860845104087}
+{"time": "2026-11-17T21:58:12.491906+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.95677409991712}
+{"time": "2026-11-17T21:58:12.492904+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "pressure", "unit": "hPa", "value": 1012.5804326666802}
+{"time": "2026-11-17T21:58:14.490125+00:00", "room": "office", "sensor_id": "station-02", "metric": "temperature", "unit": "C", "value": 22.952436392688735}
+{"time": "2026-11-17T21:58:16.490001+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "humidity", "unit": "%", "value": 45.370275866365716}
+{"time": "2026-11-17T21:58:17.491892+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.972171034608085}
+{"time": "2026-11-17T21:58:22.489754+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 21.175495931274718}
+{"time": "2026-11-17T21:58:22.490744+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "pressure", "unit": "hPa", "value": 1013.2717116979609}
+{"time": "2026-11-17T21:58:23.490067+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "humidity", "unit": "%", "value": 45.68887864337759}
+{"time": "2026-11-17T21:58:26.489830+00:00", "room": "office", "sensor_id": "station-02", "metric": "temperature", "unit": "C", "value": 23.343867907873044}
+{"time": "2026-11-17T21:58:27.489753+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.96810292905428}
+{"time": "2026-11-17T21:58:30.489870+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "humidity", "unit": "%", "value": 45.87591054008318}
+{"time": "2026-11-17T21:58:32.490570+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.62566164641476}
+{"time": "2026-11-17T21:58:32.491534+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "pressure", "unit": "hPa", "value": 1013.1614264643741}

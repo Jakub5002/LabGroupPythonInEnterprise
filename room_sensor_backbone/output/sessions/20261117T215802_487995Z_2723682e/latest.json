@@ -1,0 +1,52 @@
+{
+  "series": {
+    "room": "laboratory",
+    "sensor_id": "station-01",
+    "metric": "temperature",
+    "unit": "C"
+  },
+  "points": [
+    {
+      "time": "2026-11-17T21:58:07.490057+00:00",
+      "value": 20.98325696595763
+    },
+    {
+      "time": "2026-11-17T21:58:12.491906+00:00",
+      "value": 20.975909581915463
+    },
+    {
+      "time": "2026-11-17T21:58:17.491892+00:00",
+      "value": 20.991614455300247
+    },
+    {
+      "time": "2026-11-17T21:58:22.489754+00:00",
+      "value": 21.199005849900214
+    },
+    {
+      "time": "2026-11-17T21:58:27.489753+00:00",
+      "value": 20.987464987635366
+    },
+    {
+      "time": "2026-11-17T21:58:32.490570+00:00",
+      "value": 20.638174879343055
+    }
+  ],
+  "summary": {
+    "count": 6,
+    "mean": 20.96257112000866,
+    "minimum": 20.638174879343055,
+    "maximum": 21.199005849900214,
+    "median": 20.9853609767965,
+    "sample_sd": 0.1806672860347488
+  },
+  "window_capacity": 30,
+  "calibration_applied": true,
+  "calibration": {
+    "enabled": true,
+    "scale": 1.02,
+    "offset": -0.4
+  },
+  "status": "interrupted",
+  "records_saved": 15,
+  "selected_records": 6
+}

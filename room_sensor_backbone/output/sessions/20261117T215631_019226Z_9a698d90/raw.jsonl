@@ -1,0 +1,2 @@
+{"time": "2026-11-17T21:56:36.026419+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.963977417605516}
+{"time": "2026-11-17T21:56:38.025838+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "humidity", "unit": "%", "value": 46.49860845104087}
