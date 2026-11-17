@@ -48,12 +48,26 @@ def rolling_windows(readings: Iterable[dict], size: int) -> Iterator[list[dict]]
 Yield partial windows during warm-up. One sample permits a mean but not sample
 standard deviation. Do not mix series; do not leak mutable window state.
 """
-    # TODO G5: your implementation begins here.
-    # Validate size, create a deque(maxlen=size), and keep one series/unit only.
-    # Store copies, then yield a new list of record copies after every input.
-    # Keep warm-up windows and do not retain the whole history.
-    raise NotImplementedError("G5: implement rolling_windows in streaming.py.")
-    yield []  # Unreachable marker: preserve generator behaviour until implemented.
+    if isinstance(size, bool) or not isinstance(size, int) or size < 1:
+        raise ValueError("window size must be a positive integer.")
+
+    window: deque[dict] = deque(maxlen=size)
+    series_identity: tuple[str, str, str, str] | None = None
+
+    for row in readings:
+        current_identity = (
+            row["room"],
+            row["sensor_id"],
+            row["metric"],
+            row["unit"],
+        )
+        if series_identity is None:
+            series_identity = current_identity
+        elif current_identity != series_identity:
+            raise ValueError("rolling_windows accepts records from one series only.")
+
+        window.append(row.copy())
+        yield [item.copy() for item in window]
 
 
 def build_snapshot(window: list[dict], selection: dict, calibration: dict,
