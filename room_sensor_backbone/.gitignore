@@ -1,5 +1,3 @@
 __pycache__/
 *.pyc
-output/sessions/__pycache__/
-*.pyc
 *.log

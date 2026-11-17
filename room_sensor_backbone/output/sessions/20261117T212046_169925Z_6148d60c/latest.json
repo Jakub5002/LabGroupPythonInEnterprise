@@ -1,0 +1,27 @@
+{
+  "series": {
+    "room": "laboratory",
+    "sensor_id": "station-01",
+    "metric": "temperature",
+    "unit": "C"
+  },
+  "points": [],
+  "summary": {
+    "count": 0,
+    "mean": null,
+    "minimum": null,
+    "maximum": null,
+    "median": null,
+    "sample_sd": null
+  },
+  "window_capacity": 30,
+  "calibration_applied": true,
+  "calibration": {
+    "enabled": true,
+    "scale": 1.02,
+    "offset": -0.4
+  },
+  "status": "failed",
+  "records_saved": 0,
+  "selected_records": 0
+}
