@@ -9,47 +9,31 @@ from math import isfinite
 import random
 import time
 from typing import Callable, Iterator
+
 from records import UNITS, parse_record
 
 
 def sensor_values(sensor: dict) -> Iterator[float]:
-    """TASK G1: yield seeded noisy values forever, retaining no history. 
-    
+    """SOLUTION G1: yield seeded noisy values forever, retaining no history.
+
 Use a private Random instance, not random.seed(). Temperature is in C, humidity
 in percent, pressure in hPa. The clipping is a teaching model, not sensor physics.
 """
-    _LIMITS = {
-    "temperature": (None, None),    # not clipped
-    "humidity":    (0.0, 100.0),    # percent
-    "pressure":    (0.0, None),     # hPa, lower bound only
-    }
-
-    rng = random.Random(sensor["seed"])   # private; global state untouched
-    mean = sensor["mean"]
-    noise = sensor["noise_std"]
-    low, high = _LIMITS[sensor["metric"]]
-
+    rng = random.Random(sensor["seed"])
     while True:
-        value = rng.gauss(mean, noise)  
-        if not isfinite(value):           
-            raise ValueError(
-                f"Non-finite sample for sensor {sensor.get('sensor_id')!r}."
-            )
-        if low is not None:
-            value = max(low, value)
-        if high is not None:
-            value = min(high, value)
+        value = rng.gauss(sensor["mean"], sensor["noise_std"])
+        if not isfinite(value):
+            raise ValueError("The simulated value overflowed; reduce mean/noise_std.")
+        if sensor["metric"] == "humidity":
+            value = min(100.0, max(0.0, value))
+        elif sensor["metric"] == "pressure":
+            value = max(0.0, value)
         yield value
-    # TODO G1: your implementation begins here.
-    # Create your own random.Random using sensor["seed"].
-    # In an infinite loop, sample, check finiteness, apply the metric limits,
-    # and yield one float. Do not sleep or accumulate a list here.
-
 
 
 def wait_until(deadline: float, clock: Callable = time.monotonic,
                sleep: Callable = time.sleep) -> None:
-    """TASK G2: wait until an absolute monotonic deadline, without busy-waiting.
+    """SOLUTION G2: wait until an absolute monotonic deadline, without busy-waiting.
 
 Recheck after sleeping. An OS can wake us late; a test sleeper can wake us early.
 Neither case should cause us to deliberately emit before the deadline.
@@ -58,10 +42,7 @@ Neither case should cause us to deliberately emit before the deadline.
     while remaining > 0:
         sleep(remaining)
         remaining = deadline - clock()
-    # TODO G2: your implementation begins here.
-    # Subtract clock() from deadline to find the remaining delay.
-    # While it is positive, call sleep(remaining), then check the clock again.
-    # Never busy-wait or request a negative sleep.
+
 
 def utc_now() -> datetime:
     """Use wall-clock UTC for stored timestamps, not for scheduling delays."""

@@ -1,0 +1,12 @@
+{
+  "test_method": "Minimal API stand-in, not installed Streamlit or a browser",
+  "checks": [
+    "Offline demo produces four metric calls and three plotted columns.",
+    "Reading leaves the snapshot unchanged.",
+    "Pause retains the previous view and disables the fragment interval.",
+    "Read once now refreshes the view while paused.",
+    "Malformed JSON preserves the old view with a warning.",
+    "Switching files clears data from the previous source.",
+    "Curve toggles alter plot selection without recalculating statistics."
+  ]
+}

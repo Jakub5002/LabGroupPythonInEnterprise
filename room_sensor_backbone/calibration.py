@@ -15,13 +15,9 @@ def calibrate_value(value: float, scale: float = 1.0, offset: float = 0.0) -> fl
 
 
 def calibrate_reading(reading: dict, scale: float, offset: float) -> dict:
-    """YOUR TASK C1: return a new record with only its value changed.
-
-    Call calibrate_value. Keep time, room, sensor_id, metric, and unit unchanged.
-    The original dictionary must remain untouched; never calibrate it in place.
-    """
-    # Copy the record, calculate the new value, and return your copy.
-    new_record = reading.copy()
-    new_record["value"] = calibrate_value(reading["value"], scale=scale, offset=offset)
-    return new_record
-    raise NotImplementedError("C1: implement record calibration in calibration.py")
+    """SOLUTION C1: copy a record and change only the copy's numerical value."""
+    # A shallow copy is sufficient: our record fields are strings and numbers.
+    corrected = reading.copy()
+    corrected["value"] = calibrate_value(reading["value"], scale, offset)
+    # Identity, time and unit survive; the raw dictionary is never modified.
+    return corrected

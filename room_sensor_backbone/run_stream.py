@@ -12,6 +12,8 @@ import time
 from recording import append_reading, create_session, serialisable_config, write_snapshot
 from simulation import simulate_sensors
 from streaming import build_snapshot, rolling_windows, select_calibrated
+from trend_analysis import add_trends
+from visualisation_config import DEFAULTS
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,9 +36,24 @@ def run_simulation(config: dict) -> Path:
                 "records_saved": 0, "selected_records": 0}
     snapshot = build_snapshot([], config["selection"], config["calibration"],
                               config["stream"]["window_size"])
+    view = config.get("visualisation", DEFAULTS)
+    identity = tuple(config["selection"][k] for k in ("room", "sensor_id", "metric"))
+    selected_sensor = next(sensor for sensor in config["simulation"]["sensors"]
+                           if tuple(sensor[k] for k in ("room", "sensor_id", "metric")) == identity)
+
+    def publish():
+        """One writer publishes a complete bounded snapshot; no browser is involved."""
+        document = add_trends(snapshot, view["moving_average_samples"])
+        document.update(schema_version=1, source_mode="simulation", status=status,
+                        records_saved=count, selected_records=selected_count,
+                        started_at=metadata["started_at"],
+                        published_at=datetime.now(timezone.utc).isoformat(),
+                        expected_interval_seconds=selected_sensor["interval_seconds"])
+        write_snapshot(session / "latest.json", document)
+
     write_snapshot(session / "session.json", metadata)
-    write_snapshot(session / "latest.json", {**snapshot, "status": status,
-                                            "records_saved": 0, "selected_records": 0})
+    publish()
+    print(f'Dashboard: python -m streamlit run dashboard.py --server.address=127.0.0.1 -- "{session / "latest.json"}"', flush=True)
     source = simulate_sensors(config["simulation"]["sensors"])
     limit = config["simulation"]["max_readings"]
     incoming = source if limit is None else islice(source, limit)
@@ -62,10 +79,7 @@ def run_simulation(config: dict) -> Path:
                 selected_count += 1
                 snapshot = build_snapshot(window, config["selection"], config["calibration"],
                                           config["stream"]["window_size"])
-                write_snapshot(session / "latest.json", {
-                    **snapshot, "status": status, "records_saved": count,
-                    "selected_records": selected_count,
-                })
+                publish()
                 last = window[-1]
                 print(f'{last["time"]} | {last["metric"]}={last["value"]:.3f} '
                       f'{last["unit"]} | window n={len(window)} '
@@ -86,10 +100,7 @@ def run_simulation(config: dict) -> Path:
         # Preserve an original failure even if a full disk prevents final metadata.
         try:
             write_snapshot(session / "session.json", metadata)
-            write_snapshot(session / "latest.json", {
-                **snapshot, "status": status, "records_saved": count,
-                "selected_records": selected_count,
-            })
+            publish()
         except OSError:
             if status != "failed":
                 raise

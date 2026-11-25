@@ -13,16 +13,12 @@ from uuid import uuid4
 
 
 def append_reading(stream: TextIO, reading: dict, fsync: bool = False) -> None:
-    """TASK G6: write one complete JSON line, then flush Python's buffer.
+    """SOLUTION G6: write one complete JSON line, then flush Python's buffer.
 
 Serialise before writing, so an invalid number does not write a partial object.
 With fsync=True, also request filesystem synchronisation. Propagate write errors;
 continuing silently would make a monitor appear healthy while losing its archive.
 """
-    # TODO G6: your implementation begins here.
-    # Serialise before writing (allow_nan=False), then add one newline.
-    # Write and flush each record; call os.fsync only when requested.
-    # The caller owns the file handle. Do not catch and hide I/O errors.
     line = json.dumps(reading, ensure_ascii=False, allow_nan=False) + "\n"
     stream.write(line)
     stream.flush()
@@ -62,6 +58,8 @@ def create_session(config: dict) -> Path:
                    "summary_path": "offline/summary.json"},
         "logging": {"level": "INFO", "path": "offline/analysis.log"},
     }
+    if "visualisation" in config:
+        offline["visualisation"] = config["visualisation"].copy()
     write_snapshot(session / "offline_config.json", offline)
     return session
 

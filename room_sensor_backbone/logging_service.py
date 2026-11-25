@@ -17,13 +17,10 @@ def configure_logging(level: str = "INFO", log_path: Optional[Path] = None) -> N
 
     handlers = [logging.StreamHandler()]
     if log_path is not None:
-        # YOUR TASK L1: create the parent directory, then append a UTF-8 FileHandler.
-        # Keep the StreamHandler too. Use append mode so earlier runs are retained.
-        log_path = Path(log_path)
-        log_path.parent.mkdir(parents=True, exist_ok = True)
-        file_handler = logging.FileHandler(log_path, mode="a", encoding="utf-8")
-        handlers.append(file_handler)
-        
+        path = Path(log_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        # 'a' appends. Opening in 'w' would erase messages from earlier runs.
+        handlers.append(logging.FileHandler(path, mode="a", encoding="utf-8"))
 
     # Replacing the entry point's old handlers prevents duplicate messages.
     # This global reset suits our standalone script, not a general-purpose library.

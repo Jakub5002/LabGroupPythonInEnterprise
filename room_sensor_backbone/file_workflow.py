@@ -3,12 +3,17 @@
 A file still contains a finite dataset. Do not pass an infinite generator to the
 list-building functions below. The new run.py chooses this or the streaming path.
 """
+from datetime import datetime, timezone
 import logging
 from analysis import explore_data, summarise_by_series
 from processing import process_readings
 from readers import read_data
 from records import UNITS
 from storage import save_csv, save_json
+from recording import write_snapshot
+from streaming import build_snapshot
+from trend_analysis import add_trends, instant
+from visualisation_config import DEFAULTS, file_snapshot_path
 
 LOGGER = logging.getLogger(__name__)
 
@@ -51,3 +56,19 @@ def run_files(config: dict) -> None:
     label = "Calibrated" if result["calibration_applied"] else "Uncalibrated"
     print(f"{label} summary:", result["summary"])
 
+
+    # New visualisation boundary: sort copies by time and keep only a display window.
+    # The existing report still describes ALL selected file records.
+    view = config.get("visualisation", DEFAULTS)
+    ordered = sorted(result["readings"], key=lambda row: instant(row["time"]))
+    window = ordered[-view["file_window_size"]:]
+    snapshot = build_snapshot(window, config["selection"], config["calibration"],
+                              view["file_window_size"])
+    snapshot = add_trends(snapshot, view["moving_average_samples"])
+    snapshot.update(schema_version=1, source_mode="files", status="completed",
+                    published_at=datetime.now(timezone.utc).isoformat(),
+                    records_saved=len(raw_readings), selected_records=len(ordered))
+    destination = file_snapshot_path(config)
+    write_snapshot(destination, snapshot)
+    print(f'Dashboard snapshot: {destination}', flush=True)
+    print(f'View: python -m streamlit run dashboard.py --server.address=127.0.0.1 -- "{destination}"', flush=True)

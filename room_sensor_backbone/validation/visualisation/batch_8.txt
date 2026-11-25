@@ -1,0 +1,27 @@
+test_R2_jsonl_matches_csv (exercise_tasks.TaskChecks.test_R2_jsonl_matches_csv)
+The line-based reader obeys the same record contract. ... ok
+test_X2_load_config (exercise_tasks.TaskChecks.test_X2_load_config)
+The supplied assembly should work as soon as X1 and X2 work. ... ok
+test_empty_selection (test_baseline.BaselineChecks.test_empty_selection)
+Missing observations must not become invented zero measurements. ... ok
+test_unknown_format (test_baseline.BaselineChecks.test_unknown_format)
+An unsupported format is an error, not an empty dataset. ... ok
+test_old_default_and_new_files_mode_match (test_generator_extension.ConfigurationChecks.test_old_default_and_new_files_mode_match) ... ok
+test_G2_rechecks_after_early_wakeup (test_generator_extension.GeneratorTasks.test_G2_rechecks_after_early_wakeup) ... ok
+test_G4_selects_before_calibrating_and_preserves_input (test_generator_extension.GeneratorTasks.test_G4_selects_before_calibrating_and_preserves_input) ... ok
+test_atomic_snapshot_replaces_only_complete_json (test_generator_extension.GeneratorTasks.test_atomic_snapshot_replaces_only_complete_json) ... ok
+test_limit_can_end_before_first_selected_record (test_generator_extension.IntegrationChecks.test_limit_can_end_before_first_selected_record) ... ok
+test_explicit_config_argument_is_relative_to_calling_directory (test_solutions.ApplicationChecks.test_explicit_config_argument_is_relative_to_calling_directory) ... ok
+test_all_outputs_are_prevented_from_overwriting_config (test_solutions.ConfigurationChecks.test_all_outputs_are_prevented_from_overwriting_config) ... ok
+test_paths_are_absolute_independent_copies_without_output_creation (test_solutions.ConfigurationChecks.test_paths_are_absolute_independent_copies_without_output_creation) ... ok
+test_even_median_and_sample_standard_deviation (test_solutions.ReaderAndAnalysisChecks.test_even_median_and_sample_standard_deviation) ... ok
+test_nonfinite_calibration_result_is_rejected (test_solutions.ReaderAndAnalysisChecks.test_nonfinite_calibration_result_is_rejected) ... ok
+test_config_defaults_partial_override_and_nonmutation (test_visualisation.BoundaryChecks.test_config_defaults_partial_override_and_nonmutation) ... ok
+test_unfinished_numerical_tasks_are_explicit_not_fabricated (test_visualisation.BoundaryChecks.test_unfinished_numerical_tasks_are_explicit_not_fabricated) ... ok
+test_V2_constant_series_is_zero_not_undefined (test_visualisation.VisualisationTasks.test_V2_constant_series_is_zero_not_undefined) ... ok
+test_V3_reopens_file_instead_of_caching_previous_json (test_visualisation.VisualisationTasks.test_V3_reopens_file_instead_of_caching_previous_json) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 13.283s
+
+OK

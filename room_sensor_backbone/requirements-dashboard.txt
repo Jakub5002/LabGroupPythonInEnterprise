@@ -1,0 +1,3 @@
+# The collector still uses only the standard library.
+# Install only for the optional browser program, in a Python 3.11+ environment.
+streamlit>=1.37,<2

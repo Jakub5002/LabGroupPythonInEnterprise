@@ -1,0 +1,8 @@
+{
+  "raw_count": 10,
+  "live_window_count": 5,
+  "offline_window_count": 10,
+  "raw_archive_unchanged_by_reanalysis": true,
+  "live_status": "completed",
+  "stored_analysis_matches_displayed_points": true
+}

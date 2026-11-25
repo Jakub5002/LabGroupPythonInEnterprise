@@ -1,0 +1,29 @@
+test_R1_json_matches_csv (exercise_tasks.TaskChecks.test_R1_json_matches_csv)
+Different serialisation must not change the measurements. ... ok
+test_X1_missing_and_unknown_keys (exercise_tasks.TaskChecks.test_X1_missing_and_unknown_keys)
+A misspelled field must not be silently ignored. ... ok
+test_basic_statistics (test_baseline.BaselineChecks.test_basic_statistics)
+Check the numbers that the first run displays. ... ok
+test_series_selection (test_baseline.BaselineChecks.test_series_selection)
+Use the complete identity and consume a one-use iterator correctly. ... ok
+test_invalid_numerical_settings (test_generator_extension.ConfigurationChecks.test_invalid_numerical_settings) ... ok
+test_G1_lazy_and_reproducible (test_generator_extension.GeneratorTasks.test_G1_lazy_and_reproducible) ... ok
+test_G4_disabled_calibration_still_copies (test_generator_extension.GeneratorTasks.test_G4_disabled_calibration_still_copies) ... ok
+test_G6_optional_fsync_and_write_failure (test_generator_extension.GeneratorTasks.test_G6_optional_fsync_and_write_failure) ... ok
+test_archive_includes_unselected_series_and_limit_is_total (test_generator_extension.IntegrationChecks.test_archive_includes_unselected_series_and_limit_is_total) ... ok
+test_default_run_from_another_directory (test_solutions.ApplicationChecks.test_default_run_from_another_directory) ... ok
+test_successful_runs_preserve_input_and_append_log_once (test_solutions.ApplicationChecks.test_successful_runs_preserve_input_and_append_log_once) ... ok
+test_exact_choices_reject_wrong_case_and_containers (test_solutions.ConfigurationChecks.test_exact_choices_reject_wrong_case_and_containers) ... ok
+test_empty_jsonl_is_a_valid_empty_dataset (test_solutions.ReaderAndAnalysisChecks.test_empty_jsonl_is_a_valid_empty_dataset) ... ok
+test_jsonl_invalid_object_reports_physical_line (test_solutions.ReaderAndAnalysisChecks.test_jsonl_invalid_object_reports_physical_line) ... ok
+test_logging_reconfiguration_has_one_console_and_one_file (test_solutions.StorageAndLoggingChecks.test_logging_reconfiguration_has_one_console_and_one_file) ... INFO | check | Zażółć-one
+INFO | check | Zażółć-two
+ok
+test_offline_and_finished_runs_are_not_live_outages (test_visualisation.BoundaryChecks.test_offline_and_finished_runs_are_not_live_outages) ... ok
+test_V1_rejects_bad_capacity_and_nonfinite_values (test_visualisation.VisualisationTasks.test_V1_rejects_bad_capacity_and_nonfinite_values) ... ok
+test_V3_missing_invalid_and_oversized_files_raise (test_visualisation.VisualisationTasks.test_V3_missing_invalid_and_oversized_files_raise) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 15.551s
+
+OK

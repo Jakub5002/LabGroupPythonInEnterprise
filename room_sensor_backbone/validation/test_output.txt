@@ -76,36 +76,36 @@ test_recording_directory_cannot_be_log_file (test_generator_extension.Configurat
 test_selection_must_exist_and_identifiers_are_exact (test_generator_extension.ConfigurationChecks.test_selection_must_exist_and_identifiers_are_exact) ... ok
 test_strict_sensor_schema_and_duplicates (test_generator_extension.ConfigurationChecks.test_strict_sensor_schema_and_duplicates) ... ok
 test_validation_does_not_mutate_and_paths_use_config_dir (test_generator_extension.ConfigurationChecks.test_validation_does_not_mutate_and_paths_use_config_dir) ... ok
-test_G1_independent_random_streams (test_generator_extension.GeneratorTasks.test_G1_independent_random_streams) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_G1_lazy_and_reproducible (test_generator_extension.GeneratorTasks.test_G1_lazy_and_reproducible) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_G1_zero_noise_and_supported_ranges (test_generator_extension.GeneratorTasks.test_G1_zero_noise_and_supported_ranges) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_G2_rechecks_after_early_wakeup (test_generator_extension.GeneratorTasks.test_G2_rechecks_after_early_wakeup) ... skipped 'G2: implement wait_until in simulation.py.'
-test_G2_wait_until_and_already_due (test_generator_extension.GeneratorTasks.test_G2_wait_until_and_already_due) ... skipped 'G2: implement wait_until in simulation.py.'
-test_G3_close_releases_open_file (test_generator_extension.GeneratorTasks.test_G3_close_releases_open_file) ... skipped 'G3: implement iter_jsonl in streaming.py.'
-test_G3_empty_file (test_generator_extension.GeneratorTasks.test_G3_empty_file) ... skipped 'G3: implement iter_jsonl in streaming.py.'
-test_G3_line_reader_lazy_and_strict (test_generator_extension.GeneratorTasks.test_G3_line_reader_lazy_and_strict) ... skipped 'G3: implement iter_jsonl in streaming.py.'
-test_G3_missing_file_is_opened_only_when_consumed (test_generator_extension.GeneratorTasks.test_G3_missing_file_is_opened_only_when_consumed) ... skipped 'G3: implement iter_jsonl in streaming.py.'
-test_G4_disabled_calibration_still_copies (test_generator_extension.GeneratorTasks.test_G4_disabled_calibration_still_copies) ... skipped 'G4: implement select_calibrated in streaming.py.'
-test_G4_is_lazy_and_does_not_read_ahead (test_generator_extension.GeneratorTasks.test_G4_is_lazy_and_does_not_read_ahead) ... skipped 'G4: implement select_calibrated in streaming.py.'
-test_G4_selects_before_calibrating_and_preserves_input (test_generator_extension.GeneratorTasks.test_G4_selects_before_calibrating_and_preserves_input) ... skipped 'G4: implement select_calibrated in streaming.py.'
-test_G5_bounded_window_and_warmup (test_generator_extension.GeneratorTasks.test_G5_bounded_window_and_warmup) ... skipped 'G5: implement rolling_windows in streaming.py.'
-test_G5_rejects_invalid_window_size (test_generator_extension.GeneratorTasks.test_G5_rejects_invalid_window_size) ... skipped 'G5: implement rolling_windows in streaming.py.'
-test_G5_rejects_mixed_series (test_generator_extension.GeneratorTasks.test_G5_rejects_mixed_series) ... skipped 'G5: implement rolling_windows in streaming.py.'
-test_G5_snapshot_copies_are_independent (test_generator_extension.GeneratorTasks.test_G5_snapshot_copies_are_independent) ... skipped 'G5: implement rolling_windows in streaming.py.'
-test_G6_flushes_one_line_at_a_time (test_generator_extension.GeneratorTasks.test_G6_flushes_one_line_at_a_time) ... skipped 'G6: implement append_reading in recording.py.'
-test_G6_optional_fsync_and_write_failure (test_generator_extension.GeneratorTasks.test_G6_optional_fsync_and_write_failure) ... skipped 'G6: implement append_reading in recording.py.'
-test_G6_serialise_before_write (test_generator_extension.GeneratorTasks.test_G6_serialise_before_write) ... skipped 'G6: implement append_reading in recording.py.'
+test_G1_independent_random_streams (test_generator_extension.GeneratorTasks.test_G1_independent_random_streams) ... ok
+test_G1_lazy_and_reproducible (test_generator_extension.GeneratorTasks.test_G1_lazy_and_reproducible) ... ok
+test_G1_zero_noise_and_supported_ranges (test_generator_extension.GeneratorTasks.test_G1_zero_noise_and_supported_ranges) ... ok
+test_G2_rechecks_after_early_wakeup (test_generator_extension.GeneratorTasks.test_G2_rechecks_after_early_wakeup) ... ok
+test_G2_wait_until_and_already_due (test_generator_extension.GeneratorTasks.test_G2_wait_until_and_already_due) ... ok
+test_G3_close_releases_open_file (test_generator_extension.GeneratorTasks.test_G3_close_releases_open_file) ... ok
+test_G3_empty_file (test_generator_extension.GeneratorTasks.test_G3_empty_file) ... ok
+test_G3_line_reader_lazy_and_strict (test_generator_extension.GeneratorTasks.test_G3_line_reader_lazy_and_strict) ... ok
+test_G3_missing_file_is_opened_only_when_consumed (test_generator_extension.GeneratorTasks.test_G3_missing_file_is_opened_only_when_consumed) ... ok
+test_G4_disabled_calibration_still_copies (test_generator_extension.GeneratorTasks.test_G4_disabled_calibration_still_copies) ... ok
+test_G4_is_lazy_and_does_not_read_ahead (test_generator_extension.GeneratorTasks.test_G4_is_lazy_and_does_not_read_ahead) ... ok
+test_G4_selects_before_calibrating_and_preserves_input (test_generator_extension.GeneratorTasks.test_G4_selects_before_calibrating_and_preserves_input) ... ok
+test_G5_bounded_window_and_warmup (test_generator_extension.GeneratorTasks.test_G5_bounded_window_and_warmup) ... ok
+test_G5_rejects_invalid_window_size (test_generator_extension.GeneratorTasks.test_G5_rejects_invalid_window_size) ... ok
+test_G5_rejects_mixed_series (test_generator_extension.GeneratorTasks.test_G5_rejects_mixed_series) ... ok
+test_G5_snapshot_copies_are_independent (test_generator_extension.GeneratorTasks.test_G5_snapshot_copies_are_independent) ... ok
+test_G6_flushes_one_line_at_a_time (test_generator_extension.GeneratorTasks.test_G6_flushes_one_line_at_a_time) ... ok
+test_G6_optional_fsync_and_write_failure (test_generator_extension.GeneratorTasks.test_G6_optional_fsync_and_write_failure) ... ok
+test_G6_serialise_before_write (test_generator_extension.GeneratorTasks.test_G6_serialise_before_write) ... ok
 test_atomic_snapshot_replaces_only_complete_json (test_generator_extension.GeneratorTasks.test_atomic_snapshot_replaces_only_complete_json) ... ok
-test_first_measurement_is_at_5_not_0 (test_generator_extension.GeneratorTasks.test_first_measurement_is_at_5_not_0) ... skipped 'G2: implement wait_until in simulation.py.'
-test_independent_intervals_and_stable_ties (test_generator_extension.GeneratorTasks.test_independent_intervals_and_stable_ties) ... skipped 'G2: implement wait_until in simulation.py.'
-test_no_unused_eleventh_measurement (test_generator_extension.GeneratorTasks.test_no_unused_eleventh_measurement) ... skipped 'G2: implement wait_until in simulation.py.'
-test_slow_consumer_does_not_create_synthetic_backlog (test_generator_extension.GeneratorTasks.test_slow_consumer_does_not_create_synthetic_backlog) ... skipped 'G2: implement wait_until in simulation.py.'
+test_first_measurement_is_at_5_not_0 (test_generator_extension.GeneratorTasks.test_first_measurement_is_at_5_not_0) ... ok
+test_independent_intervals_and_stable_ties (test_generator_extension.GeneratorTasks.test_independent_intervals_and_stable_ties) ... ok
+test_no_unused_eleventh_measurement (test_generator_extension.GeneratorTasks.test_no_unused_eleventh_measurement) ... ok
+test_slow_consumer_does_not_create_synthetic_backlog (test_generator_extension.GeneratorTasks.test_slow_consumer_does_not_create_synthetic_backlog) ... ok
 test_snapshot_empty_and_one_sample (test_generator_extension.GeneratorTasks.test_snapshot_empty_and_one_sample) ... ok
-test_archive_includes_unselected_series_and_limit_is_total (test_generator_extension.IntegrationChecks.test_archive_includes_unselected_series_and_limit_is_total) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_ctrl_c_flushes_recording_and_final_metadata (test_generator_extension.IntegrationChecks.test_ctrl_c_flushes_recording_and_final_metadata) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_limit_can_end_before_first_selected_record (test_generator_extension.IntegrationChecks.test_limit_can_end_before_first_selected_record) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_short_real_time_run_archive_and_offline_analysis (test_generator_extension.IntegrationChecks.test_short_real_time_run_archive_and_offline_analysis) ... skipped 'G1: implement sensor_values in simulation.py.'
-test_storage_failure_is_not_a_success (test_generator_extension.IntegrationChecks.test_storage_failure_is_not_a_success) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_archive_includes_unselected_series_and_limit_is_total (test_generator_extension.IntegrationChecks.test_archive_includes_unselected_series_and_limit_is_total) ... ok
+test_ctrl_c_flushes_recording_and_final_metadata (test_generator_extension.IntegrationChecks.test_ctrl_c_flushes_recording_and_final_metadata) ... ok
+test_limit_can_end_before_first_selected_record (test_generator_extension.IntegrationChecks.test_limit_can_end_before_first_selected_record) ... ok
+test_short_real_time_run_archive_and_offline_analysis (test_generator_extension.IntegrationChecks.test_short_real_time_run_archive_and_offline_analysis) ... ok
+test_storage_failure_is_not_a_success (test_generator_extension.IntegrationChecks.test_storage_failure_is_not_a_success) ... ok
 test_all_three_formats_produce_identical_calculations (test_solutions.ApplicationChecks.test_all_three_formats_produce_identical_calculations) ... ok
 test_bad_config_has_nonzero_exit_and_no_outputs (test_solutions.ApplicationChecks.test_bad_config_has_nonzero_exit_and_no_outputs) ... ok
 test_collision_failure_keeps_raw_input_intact (test_solutions.ApplicationChecks.test_collision_failure_keeps_raw_input_intact) ... ok
@@ -154,6 +154,6 @@ INFO | check | Zażółć-two
 ok
 
 ----------------------------------------------------------------------
-Ran 118 tests in 12.671s
+Ran 118 tests in 17.460s
 
-OK (skipped=28)
+OK

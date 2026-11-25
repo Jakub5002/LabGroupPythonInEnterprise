@@ -1,0 +1,28 @@
+test_E1_inventory (exercise_tasks.TaskChecks.test_E1_inventory)
+The full file contains six series, not one mixed stream of comparable values. ... ok
+test_W1_csv_round_trip (exercise_tasks.TaskChecks.test_W1_csv_round_trip)
+Your CSV output must remain input to the same project. ... ok
+test_X3_disabled_and_empty (exercise_tasks.TaskChecks.test_X3_disabled_and_empty)
+Disabling calibration is explicit; an empty selection remains empty. ... ok
+test_invalid_values (test_baseline.BaselineChecks.test_invalid_values)
+Reject absent, boolean and non-finite measurements at the input boundary. ... ok
+test_humidity_and_pressure_means (test_generator_extension.ConfigurationChecks.test_humidity_and_pressure_means) ... ok
+test_strict_sensor_schema_and_duplicates (test_generator_extension.ConfigurationChecks.test_strict_sensor_schema_and_duplicates) ... ok
+test_G3_empty_file (test_generator_extension.GeneratorTasks.test_G3_empty_file) ... ok
+test_G5_rejects_mixed_series (test_generator_extension.GeneratorTasks.test_G5_rejects_mixed_series) ... ok
+test_no_unused_eleventh_measurement (test_generator_extension.GeneratorTasks.test_no_unused_eleventh_measurement) ... ok
+test_all_three_formats_produce_identical_calculations (test_solutions.ApplicationChecks.test_all_three_formats_produce_identical_calculations) ... ok
+test_missing_config_and_extra_arguments_are_not_silently_ignored (test_solutions.ApplicationChecks.test_missing_config_and_extra_arguments_are_not_silently_ignored) ... ok
+test_disabled_calibration_still_requires_valid_coefficients (test_solutions.ConfigurationChecks.test_disabled_calibration_still_requires_valid_coefficients) ... ok
+test_all_three_identity_parts_keep_groups_separate (test_solutions.ReaderAndAnalysisChecks.test_all_three_identity_parts_keep_groups_separate) ... ok
+test_identity_calibration_still_returns_a_new_record (test_solutions.ReaderAndAnalysisChecks.test_identity_calibration_still_returns_a_new_record) ... ok
+test_bad_jsonl_value_does_not_truncate_old_snapshot (test_solutions.StorageAndLoggingChecks.test_bad_jsonl_value_does_not_truncate_old_snapshot) ... ok
+test_file_snapshot_path_collisions_fail_before_writing (test_visualisation.BoundaryChecks.test_file_snapshot_path_collisions_fail_before_writing) ... ok
+test_wrong_curve_length_is_rejected (test_visualisation.BoundaryChecks.test_wrong_curve_length_is_rejected) ... ok
+test_V2_rejects_naive_times_and_bad_values (test_visualisation.VisualisationTasks.test_V2_rejects_naive_times_and_bad_values) ... ok
+test_V4_raw_columns_have_real_datetimes (test_visualisation.VisualisationTasks.test_V4_raw_columns_have_real_datetimes) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 15.775s
+
+OK

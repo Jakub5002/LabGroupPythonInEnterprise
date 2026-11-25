@@ -1,0 +1,28 @@
+test_C1_new_record_and_formula (exercise_tasks.TaskChecks.test_C1_new_record_and_formula)
+Calibration changes only value and leaves the original record untouched. ... ok
+test_S1_statistics_and_small_samples (exercise_tasks.TaskChecks.test_S1_statistics_and_small_samples)
+Check sample, not population, standard deviation and both warm-up cases. ... ok
+test_X2_paths_and_original (exercise_tasks.TaskChecks.test_X2_paths_and_original)
+Resolve paths beside the config file, without changing the settings dictionary. ... ok
+test_imports_are_quiet (test_baseline.BaselineChecks.test_imports_are_quiet)
+Importing modules must not start a run or create files. ... ok
+test_all_supplied_configs (test_generator_extension.ConfigurationChecks.test_all_supplied_configs) ... ok
+test_recording_directory_cannot_be_log_file (test_generator_extension.ConfigurationChecks.test_recording_directory_cannot_be_log_file) ... ok
+test_G2_wait_until_and_already_due (test_generator_extension.GeneratorTasks.test_G2_wait_until_and_already_due) ... ok
+test_G5_bounded_window_and_warmup (test_generator_extension.GeneratorTasks.test_G5_bounded_window_and_warmup) ... ok
+test_first_measurement_is_at_5_not_0 (test_generator_extension.GeneratorTasks.test_first_measurement_is_at_5_not_0) ... ok
+test_short_real_time_run_archive_and_offline_analysis (test_generator_extension.IntegrationChecks.test_short_real_time_run_archive_and_offline_analysis) ... ok
+test_finite_assignment_entry_point (test_solutions.ApplicationChecks.test_finite_assignment_entry_point) ... ok
+test_all_six_pairs_of_destinations_are_checked (test_solutions.ConfigurationChecks.test_all_six_pairs_of_destinations_are_checked) ... ok
+test_valid_strings_keep_their_spelling (test_solutions.ConfigurationChecks.test_valid_strings_keep_their_spelling) ... ok
+test_exploration_compares_instants_not_time_text (test_solutions.ReaderAndAnalysisChecks.test_exploration_compares_instants_not_time_text) ... ok
+test_office_temperature_is_not_the_laboratory_average (test_solutions.ReaderAndAnalysisChecks.test_office_temperature_is_not_the_laboratory_average) ... ok
+test_config_rejects_misspellings_and_bad_sizes (test_visualisation.BoundaryChecks.test_config_rejects_misspellings_and_bad_sizes) ... ok
+test_unsorted_points_and_nonfinite_values_are_rejected (test_visualisation.BoundaryChecks.test_unsorted_points_and_nonfinite_values_are_rejected) ... ok
+test_V2_empty_singleton_and_repeated_instant (test_visualisation.VisualisationTasks.test_V2_empty_singleton_and_repeated_instant) ... ok
+test_V4_copies_published_curves_without_recalculating (test_visualisation.VisualisationTasks.test_V4_copies_published_curves_without_recalculating) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 14.508s
+
+OK

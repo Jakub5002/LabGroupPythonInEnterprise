@@ -1,0 +1,27 @@
+test_R2_blank_lines_and_bad_line (exercise_tasks.TaskChecks.test_R2_blank_lines_and_bad_line)
+Skip blank lines; do not silently skip a damaged measurement. ... ok
+test_X1_valid_config_unchanged (exercise_tasks.TaskChecks.test_X1_valid_config_unchanged)
+Checking configuration is a pure operation; it must not rewrite your input. ... ok
+test_calibration_formula (test_baseline.BaselineChecks.test_calibration_formula)
+The worked scalar example applies scale before adding offset. ... ok
+test_three_values (test_baseline.BaselineChecks.test_three_values)
+The first dataset is small enough for you to inspect by hand. ... ok
+test_new_session_never_overwrites_previous (test_generator_extension.ConfigurationChecks.test_new_session_never_overwrites_previous) ... ok
+test_G1_zero_noise_and_supported_ranges (test_generator_extension.GeneratorTasks.test_G1_zero_noise_and_supported_ranges) ... ok
+test_G4_is_lazy_and_does_not_read_ahead (test_generator_extension.GeneratorTasks.test_G4_is_lazy_and_does_not_read_ahead) ... ok
+test_G6_serialise_before_write (test_generator_extension.GeneratorTasks.test_G6_serialise_before_write) ... ok
+test_ctrl_c_flushes_recording_and_final_metadata (test_generator_extension.IntegrationChecks.test_ctrl_c_flushes_recording_and_final_metadata) ... ok
+test_disabled_calibration_and_console_only_logging (test_solutions.ApplicationChecks.test_disabled_calibration_and_console_only_logging) ... ok
+test_absolute_paths_and_null_logging (test_solutions.ConfigurationChecks.test_absolute_paths_and_null_logging) ... ok
+test_no_implicit_numeric_or_boolean_conversion (test_solutions.ConfigurationChecks.test_no_implicit_numeric_or_boolean_conversion) ... ok
+test_empty_selection_keeps_requested_calibration_flag (test_solutions.ReaderAndAnalysisChecks.test_empty_selection_keeps_requested_calibration_flag) ... ok
+test_missing_inputs_raise_instead_of_returning_empty_data (test_solutions.ReaderAndAnalysisChecks.test_missing_inputs_raise_instead_of_returning_empty_data) ... ok
+test_bad_json_shapes_and_counts_are_rejected (test_visualisation.BoundaryChecks.test_bad_json_shapes_and_counts_are_rejected) ... ok
+test_real_numerical_errors_are_not_hidden (test_visualisation.BoundaryChecks.test_real_numerical_errors_are_not_hidden) ... ok
+test_V1_trailing_means_and_warmup (test_visualisation.VisualisationTasks.test_V1_trailing_means_and_warmup) ... ok
+test_V3_reads_without_changing_source (test_visualisation.VisualisationTasks.test_V3_reads_without_changing_source) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 8.972s
+
+OK

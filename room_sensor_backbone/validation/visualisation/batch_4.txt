@@ -1,0 +1,29 @@
+test_L1_append_log_without_duplicate_handlers (exercise_tasks.TaskChecks.test_L1_append_log_without_duplicate_handlers)
+Two setups produce two messages, not lost history or duplicated handlers. ... INFO | exercise | first-marker
+INFO | exercise | second-marker
+ok
+test_W2_jsonl_round_trip (exercise_tasks.TaskChecks.test_W2_jsonl_round_trip)
+Replace a snapshot rather than appending duplicate old readings. ... ok
+test_X3_pure_pipeline (exercise_tasks.TaskChecks.test_X3_pure_pipeline)
+Pass a one-use iterator; select first, calibrate once, then summarise. ... ok
+test_json_writer (test_baseline.BaselineChecks.test_json_writer)
+Save and reload a result; reject NaN without truncating an old snapshot. ... ok
+test_invalid_counts_and_window_sizes (test_generator_extension.ConfigurationChecks.test_invalid_counts_and_window_sizes) ... ok
+test_validation_does_not_mutate_and_paths_use_config_dir (test_generator_extension.ConfigurationChecks.test_validation_does_not_mutate_and_paths_use_config_dir) ... ok
+test_G3_line_reader_lazy_and_strict (test_generator_extension.GeneratorTasks.test_G3_line_reader_lazy_and_strict) ... ok
+test_G5_snapshot_copies_are_independent (test_generator_extension.GeneratorTasks.test_G5_snapshot_copies_are_independent) ... ok
+test_slow_consumer_does_not_create_synthetic_backlog (test_generator_extension.GeneratorTasks.test_slow_consumer_does_not_create_synthetic_backlog) ... ok
+test_bad_config_has_nonzero_exit_and_no_outputs (test_solutions.ApplicationChecks.test_bad_config_has_nonzero_exit_and_no_outputs) ... ok
+test_missing_input_and_invalid_measurement_fail_visibly (test_solutions.ApplicationChecks.test_missing_input_and_invalid_measurement_fail_visibly) ... ok
+test_each_section_must_be_an_object (test_solutions.ConfigurationChecks.test_each_section_must_be_an_object) ... ok
+test_analysis_and_processing_do_not_mutate_any_inputs (test_solutions.ReaderAndAnalysisChecks.test_analysis_and_processing_do_not_mutate_any_inputs) ... ok
+test_json_rejects_all_non_array_containers (test_solutions.ReaderAndAnalysisChecks.test_json_rejects_all_non_array_containers) ... ok
+test_both_record_writers_round_trip_calibrated_unicode_data (test_solutions.StorageAndLoggingChecks.test_both_record_writers_round_trip_calibrated_unicode_data) ... ok
+test_finite_snapshot_is_sorted_bounded_and_matches_its_points (test_visualisation.BoundaryChecks.test_finite_snapshot_is_sorted_bounded_and_matches_its_points) ... ok
+test_V1_does_not_modify_input (test_visualisation.VisualisationTasks.test_V1_does_not_modify_input) ... ok
+test_V2_timezone_offsets_and_nonmutation (test_visualisation.VisualisationTasks.test_V2_timezone_offsets_and_nonmutation) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 13.013s
+
+OK

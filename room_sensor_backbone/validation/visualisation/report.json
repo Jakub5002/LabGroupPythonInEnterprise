@@ -1,0 +1,80 @@
+{
+  "project": "room_sensor_visualisation_solved",
+  "total": 147,
+  "passed": 147,
+  "skipped": 0,
+  "batches": [
+    {
+      "batch": 1,
+      "returncode": 0,
+      "tests": 19,
+      "reported_tests": 19,
+      "skipped": 0,
+      "seconds": 14.508,
+      "log": "batch_1.txt"
+    },
+    {
+      "batch": 2,
+      "returncode": 0,
+      "tests": 19,
+      "reported_tests": 19,
+      "skipped": 0,
+      "seconds": 6.178,
+      "log": "batch_2.txt"
+    },
+    {
+      "batch": 3,
+      "returncode": 0,
+      "tests": 19,
+      "reported_tests": 19,
+      "skipped": 0,
+      "seconds": 15.775,
+      "log": "batch_3.txt"
+    },
+    {
+      "batch": 4,
+      "returncode": 0,
+      "tests": 18,
+      "reported_tests": 18,
+      "skipped": 0,
+      "seconds": 13.013,
+      "log": "batch_4.txt"
+    },
+    {
+      "batch": 5,
+      "returncode": 0,
+      "tests": 18,
+      "reported_tests": 18,
+      "skipped": 0,
+      "seconds": 10.498,
+      "log": "batch_5.txt"
+    },
+    {
+      "batch": 6,
+      "returncode": 0,
+      "tests": 18,
+      "reported_tests": 18,
+      "skipped": 0,
+      "seconds": 15.551,
+      "log": "batch_6.txt"
+    },
+    {
+      "batch": 7,
+      "returncode": 0,
+      "tests": 18,
+      "reported_tests": 18,
+      "skipped": 0,
+      "seconds": 8.972,
+      "log": "batch_7.txt"
+    },
+    {
+      "batch": 8,
+      "returncode": 0,
+      "tests": 18,
+      "reported_tests": 18,
+      "skipped": 0,
+      "seconds": 13.283,
+      "log": "batch_8.txt"
+    }
+  ]
+}

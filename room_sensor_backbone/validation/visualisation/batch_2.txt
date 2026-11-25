@@ -1,0 +1,28 @@
+test_E1_empty_inventory (exercise_tasks.TaskChecks.test_E1_empty_inventory)
+An empty file has no start time, rooms or measurement series. ... ok
+test_S2_grouped_statistics (exercise_tasks.TaskChecks.test_S2_grouped_statistics)
+A single output file may contain separate summaries, never a mixed-unit mean. ... ok
+test_X2_reject_path_collisions (exercise_tasks.TaskChecks.test_X2_reject_path_collisions)
+Prevent a simple filename mistake from overwriting raw data. ... ok
+test_invalid_time_and_units (test_baseline.BaselineChecks.test_invalid_time_and_units)
+There is no implicit timezone or unit-conversion policy in this stage. ... ok
+test_config_and_log_collision_prevents_writes (test_generator_extension.ConfigurationChecks.test_config_and_log_collision_prevents_writes) ... ok
+test_selection_must_exist_and_identifiers_are_exact (test_generator_extension.ConfigurationChecks.test_selection_must_exist_and_identifiers_are_exact) ... ok
+test_G3_close_releases_open_file (test_generator_extension.GeneratorTasks.test_G3_close_releases_open_file) ... ok
+test_G5_rejects_invalid_window_size (test_generator_extension.GeneratorTasks.test_G5_rejects_invalid_window_size) ... ok
+test_independent_intervals_and_stable_ties (test_generator_extension.GeneratorTasks.test_independent_intervals_and_stable_ties) ... ok
+test_storage_failure_is_not_a_success (test_generator_extension.IntegrationChecks.test_storage_failure_is_not_a_success) ... ok
+test_importing_both_entry_points_does_not_create_outputs (test_solutions.ApplicationChecks.test_importing_both_entry_points_does_not_create_outputs) ... ok
+test_bad_config_json_reports_filename (test_solutions.ConfigurationChecks.test_bad_config_json_reports_filename) ... ok
+test_whitespace_only_text_and_non_text_paths_are_rejected (test_solutions.ConfigurationChecks.test_whitespace_only_text_and_non_text_paths_are_rejected) ... ok
+test_grouping_rejects_inconsistent_units (test_solutions.ReaderAndAnalysisChecks.test_grouping_rejects_inconsistent_units) ... ok
+test_pipeline_consumes_original_source_only_once (test_solutions.ReaderAndAnalysisChecks.test_pipeline_consumes_original_source_only_once) ... ok
+test_empty_live_window_can_be_waiting_or_stale (test_visualisation.BoundaryChecks.test_empty_live_window_can_be_waiting_or_stale) ... ok
+test_valid_snapshot_and_empty_warmup (test_visualisation.BoundaryChecks.test_valid_snapshot_and_empty_warmup) ... ok
+test_V2_irregular_spacing_is_not_an_index_fit (test_visualisation.VisualisationTasks.test_V2_irregular_spacing_is_not_an_index_fit) ... ok
+test_V4_empty_input_produces_empty_columns (test_visualisation.VisualisationTasks.test_V4_empty_input_produces_empty_columns) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 6.178s
+
+OK

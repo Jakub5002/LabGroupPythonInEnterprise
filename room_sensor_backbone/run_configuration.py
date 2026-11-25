@@ -11,6 +11,7 @@ from pathlib import Path
 
 from configuration import validate_config, resolve_paths
 from records import UNITS
+from visualisation_config import extract_visualisation, file_snapshot_path
 
 
 def exact_keys(value, keys: set, label: str) -> None:
@@ -113,6 +114,7 @@ def load_run_config(path: Path) -> dict:
         raise ValueError(f"{path}: JSON line {error.lineno}: {error.msg}") from error
     if not isinstance(raw, dict):
         raise ValueError("Configuration must be a JSON object.")
+    raw, visualisation = extract_visualisation(raw)
     mode = raw.get("mode", "files")
     if mode == "files":
         legacy = {key: value for key, value in raw.items() if key != "mode"}
@@ -131,7 +133,14 @@ def load_run_config(path: Path) -> dict:
             raise ValueError("Path collision: recording directory and log file.")
     else:
         raise ValueError("mode must be files or simulation.")
+    if mode == "files":
+        snapshot_path = file_snapshot_path(result)
+        temporary_path = snapshot_path.with_name(snapshot_path.name + ".tmp")
+        protected = [path, result["input"]["path"]] + [p for p in targets if p is not None]
+        if snapshot_path in protected or temporary_path in protected:
+            raise ValueError("Path collision: snapshot would overwrite an input/config/output/log.")
     if path in targets:
         raise ValueError("An output/log path must not overwrite the configuration file.")
     result["mode"] = mode
+    result["visualisation"] = visualisation
     return result

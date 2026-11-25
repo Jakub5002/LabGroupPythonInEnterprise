@@ -1,0 +1,27 @@
+test_R1_empty_and_wrong_container (exercise_tasks.TaskChecks.test_R1_empty_and_wrong_container)
+An empty array is valid; an object is not the agreed array format. ... ok
+test_X1_invalid_choices (exercise_tasks.TaskChecks.test_X1_invalid_choices)
+Reject typos and wrong value types before any output is opened. ... ok
+test_bad_csv_reports_line (test_baseline.BaselineChecks.test_bad_csv_reports_line)
+Fail-fast means the error identifies the first bad row, not every bad row. ... ok
+test_parser_does_not_mutate (test_baseline.BaselineChecks.test_parser_does_not_mutate)
+Parsing creates a fresh dictionary instead of changing the source row. ... ok
+test_invalid_modes_and_non_object (test_generator_extension.ConfigurationChecks.test_invalid_modes_and_non_object) ... ok
+test_G1_independent_random_streams (test_generator_extension.GeneratorTasks.test_G1_independent_random_streams) ... ok
+test_G3_missing_file_is_opened_only_when_consumed (test_generator_extension.GeneratorTasks.test_G3_missing_file_is_opened_only_when_consumed) ... ok
+test_G6_flushes_one_line_at_a_time (test_generator_extension.GeneratorTasks.test_G6_flushes_one_line_at_a_time) ... ok
+test_snapshot_empty_and_one_sample (test_generator_extension.GeneratorTasks.test_snapshot_empty_and_one_sample) ... ok
+test_collision_failure_keeps_raw_input_intact (test_solutions.ApplicationChecks.test_collision_failure_keeps_raw_input_intact) ... ok
+test_missing_selection_is_successfully_saved_as_empty (test_solutions.ApplicationChecks.test_missing_selection_is_successfully_saved_as_empty) ... ok
+test_each_section_rejects_missing_and_unknown_keys (test_solutions.ConfigurationChecks.test_each_section_rejects_missing_and_unknown_keys) ... ok
+test_disabled_calibration_does_not_alias_raw_dictionaries (test_solutions.ReaderAndAnalysisChecks.test_disabled_calibration_does_not_alias_raw_dictionaries) ... ok
+test_json_syntax_and_bad_item_have_context (test_solutions.ReaderAndAnalysisChecks.test_json_syntax_and_bad_item_have_context) ... ok
+test_invalid_log_levels_do_not_create_output (test_solutions.StorageAndLoggingChecks.test_invalid_log_levels_do_not_create_output) ... ok
+test_fresh_stale_and_clock_skew (test_visualisation.BoundaryChecks.test_fresh_stale_and_clock_skew) ... ok
+test_V1_empty_identity_and_long_window (test_visualisation.VisualisationTasks.test_V1_empty_identity_and_long_window) ... ok
+test_V3_calls_schema_validation (test_visualisation.VisualisationTasks.test_V3_calls_schema_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 10.498s
+
+OK

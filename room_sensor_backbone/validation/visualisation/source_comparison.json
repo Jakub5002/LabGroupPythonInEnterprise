@@ -1,0 +1,29 @@
+{
+  "base_archive": "room_sensor_generators_solved_compact.zip",
+  "unchanged_previous_python_modules": [
+    "simulation.py",
+    "run.py",
+    "analysis.py",
+    "readers.py",
+    "calibration.py",
+    "streaming.py",
+    "storage.py",
+    "records.py",
+    "configuration.py",
+    "logging_service.py",
+    "run_finite.py",
+    "processing.py"
+  ],
+  "changed_previous_python_modules": [
+    "run_stream.py",
+    "recording.py",
+    "file_workflow.py",
+    "run_configuration.py"
+  ],
+  "new_python_modules": [
+    "dashboard.py",
+    "dashboard_support.py",
+    "trend_analysis.py",
+    "visualisation_config.py"
+  ]
+}

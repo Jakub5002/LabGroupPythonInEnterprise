@@ -5,7 +5,6 @@ JSON Lines readers. Every format uses parse_record as the same input boundary.
 """
 import csv
 import json
-
 from pathlib import Path
 
 from records import FIELDS, parse_record
@@ -41,49 +40,33 @@ def read_json(path: Path) -> list[dict]:
                 f"{path}: JSON line {error.lineno}, column {error.colno}: {error.msg}"
             ) from error
 
-    """Require a list at the top level. Preserve order. An empty array returns [].
-    Raise ValueError for invalid content; let file-access errors propagate.
-    """
-    # Start with `with Path(path).open(encoding="utf-8") as stream:`.
-    # Use json.load(stream), check the container, then transform each object.
-    with Path(path).open(encoding="utf-8") as stream:
-        data = json.load(stream)
-    
-    if not isinstance(data, list):
-        raise ValueError(f"{path}: JSON file must contain an array")
+    # An object containing a 'readings' field is not our agreed file format.
+    if not isinstance(rows, list):
+        raise ValueError(f"{path}: JSON input must be an array of reading objects.")
 
     records = []
-
-    for row in data:
+    for number, row in enumerate(rows, start=1):
         try:
             records.append(parse_record(row))
         except ValueError as error:
-            raise ValueError(f"{path}: {error}") from error
-
+            # An item number is not a physical line number in a multi-line array.
+            raise ValueError(f"{path}: JSON item {number}: {error}") from error
     return records
 
 
-
 def read_jsonl(path: Path) -> list[dict]:
-    """YOUR TASK R2: read one JSON object per non-blank line, preserving order.
-
-    Use json.loads(line) and parse_record. Include the line number in a bad-row
-    error. This first version returns a finite list; streaming is a later task.
-    """
-    # Open the file with `with`, enumerate lines from 1, and skip empty lines.
+    """SOLUTION R2: decode one object per non-blank line; return a finite list."""
     records = []
-
     with Path(path).open(encoding="utf-8") as stream:
-        for line_number, line in enumerate(stream, start=1):
+        for number, line in enumerate(stream, start=1):
             if not line.strip():
-                continue
-
+                continue  # A blank line is not a measurement and is safe to skip.
             try:
-                row = json.loads(line)
-                records.append(parse_record(row))
+                records.append(parse_record(json.loads(line)))
             except ValueError as error:
-                raise ValueError(f"{path}: JSONL line {line_number}: {error}") from error
-
+                # JSONDecodeError is also a ValueError, so both failures get context.
+                raise ValueError(f"{path}: JSON Lines line {number}: {error}") from error
+    # Reading one line at a time is NOT bounded-memory processing if we keep all rows.
     return records
 
 

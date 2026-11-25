@@ -1,6 +1,0 @@
-{"time": "2026-10-01T12:00:00+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.0}
-{"time": "2026-10-01T12:01:00+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.408}
-{"time": "2026-10-01T12:02:00+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 20.816000000000003}
-{"time": "2026-10-01T12:03:00+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 21.224}
-{"time": "2026-10-01T12:04:00+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 21.632000000000005}
-{"time": "2026-10-01T12:05:00+00:00", "room": "laboratory", "sensor_id": "station-01", "metric": "temperature", "unit": "C", "value": 22.040000000000003}
